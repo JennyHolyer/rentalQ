@@ -1,0 +1,102 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.content, .toolbar-title {
+  font-family: "proxima-nova",sans-serif;
+}
+
+.item-inner {
+  font-family: "proxima-nova",sans-serif;
+  font-size: 0.9em;
+  padding: 6px 0 6px 0;
+}
+
+.header {
+  // background-color: #ff0000;
+}
+
+.card-md {
+    margin: 10px 10px 10px 10px;
+    width: calc(100% - 20px);
+    border-radius: 0px;
+    font-size: 1.4rem;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    margin-bottom: 0em;
+}
+
+.card-ios {
+    margin: 12px 12px 12px 12px;
+    width: calc(100% - 24px);
+    border-radius: 0px;
+    font-size: 1.4rem;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0em;
+}
+
+.card-header-ios, .card-header-md {
+  padding: 20px 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #242424;
+  margin: 0 0 0.8em 0;
+  background: #f4f4f4;
+}
+
+.item-add {
+  display: inline-block;
+  font-size: 1.0em;
+  float: right;
+  color: #c7c6c6;
+  font-weight: bold;
+}
+
+.bottom-margin {
+  margin-bottom: 2em;
+}
+
+.card-ios p, .card-md p {
+    margin: 0 0 2px;
+    font-size: 1.5rem;
+    color: #666;
+}
+
+.card-ios h3, .card-md h3 {
+    margin: 2px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #323a45;
+}
+
+.fab-md-in-list, .fab-ios-in-list {
+    background-color: #e91e63;
+}
+
+
+.fab ion-icon {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 2.4rem;
+    color: white;
+}
+
+.center-stuff {
+  margin: 0 auto;
+  text-align: center;
+}

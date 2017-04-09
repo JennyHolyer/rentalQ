@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-navbar color="pink">
+    <ion-title>Income</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+  <!-- Employment Information -->
+<ion-card>
+  <ion-card-header>
+    <ion-icon name="ion-coffee"></ion-icon> Employment
+    <ion-icon name="md-create" class="item-add"></ion-icon>
+  </ion-card-header>
+  <ion-card-content *ngFor="let employed of incomeemployment">
+    <div class="row">
+      <div class="col">
+        <h3>Employer</h3>
+        <p>{{employed.companyName}}</p>
+      </div>
+      <div class="col">
+        <h3>Position</h3>
+        <p>{{employed.position}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Employment Type</h3>
+        <p>{{employed.employmentType}}</p>
+      </div>
+
+      <div class="col">
+        <h3>Salary</h3>
+        <p>{{employed.salary}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Supervisor</h3>
+        <p>{{employed.managerFullName}}</p>
+      </div>
+
+      <div class="col">
+        <h3>Phone</h3>
+        <p>{{employed.phoneNumber}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Start Date</h3>
+        <p>{{ employed.startDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="col">
+        <h3>End Date</h3>
+        <p>N/A</p>
+      </div>
+    </div>
+
+  </ion-card-content>
+</ion-card>
+
+  <!-- Self-Employed -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="ion-coffee"></ion-icon> Self-Employed
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content *ngFor="let selfEmployed of incomeselfemployed">
+      <div class="row">
+        <div class="col">
+          <h3>Employer</h3>
+          <p>{{ selfEmployed.businessName }}</p>
+        </div>
+        <div class="col">
+          <h3>Position</h3>
+          <p>{{ selfEmployed.position }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>ABN Number</h3>
+          <p>{{ selfEmployed.abnNumber }}</p>
+        </div>
+        <div class="col">
+          <h3>ACN Number</h3>
+          <p>{{ selfEmployed.acnNumber }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>Salary</h3>
+          <p>{{ selfEmployed.salary }}</p>
+        </div>
+        <div class="col">
+          <h3>Start Date</h3>
+          <p>{{ selfEmployed.startDate | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- Retired -->
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="ion-coffee"></ion-icon> Retired Income
+        <ion-icon name="md-create" class="item-add" (click)="addPet()"></ion-icon>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row" *ngFor="let retired of incomeretired">
+          <div class="col">
+            <h3>Pension Name</h3>
+            <p>{{ retired.pensionName }}</p>
+          </div>
+          <div class="col">
+            <h3>Pension No.</h3>
+            <p>{{ retired.pensionNumber }}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-fab right bottom>
+     <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="md-add"></ion-icon></button>
+   </ion-fab>
+  </ion-content>

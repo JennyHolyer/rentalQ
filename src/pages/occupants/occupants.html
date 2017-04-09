@@ -1,0 +1,87 @@
+<ion-header>
+
+  <ion-navbar color="pink">
+    <ion-title>Occupants</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <!-- Co-applicants -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="contacts"></ion-icon> Co-Applicant
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row" *ngFor="let coapplicant of coapplicants">
+        <div class="col">
+          <h3>Name</h3>
+          <p>{{ coapplicant.firstName }} {{ coapplicant.lastName }}</p>
+          <br>
+          <h3>Relationship</h3>
+          <p>{{ coapplicant.relationship }}</p>
+        </div>
+        <div class="col">
+          <h3>Phone</h3>
+          <p>{{ coapplicant.phoneNumber }}</p>
+          <br>
+          <h3>Age</h3>
+          <p>{{ coapplicant.age }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+<!-- Dependents -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="people"></ion-icon> Dependents
+      <!-- <ion-icon name="md-create" class="item-add"></ion-icon> -->
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row" *ngFor="let dependent of dependents">
+        <div class="col">
+          <h3>Name</h3>
+          <p>{{ dependent.fullName }}</p>
+        </div>
+        <div class="col">
+          <h3>Age</h3>
+          <p>{{ dependent.age }}</p>
+        </div>
+        <div class="col-sm-9">
+          <ion-icon name="md-create" class="item-add-card"></ion-icon>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Pets -->
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="paw"></ion-icon> Pets
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row" *ngFor="let pet of pets">
+          <div class="col">
+            <h3>Name</h3>
+            <p>{{pet.name}}</p>
+          </div>
+          <div class="col">
+            <h3>Reg No.</h3>
+            <p>{{pet.registrationNumber}}</p>
+          </div>
+          <div class="col-sm-9">
+            <ion-icon name="md-create" class="item-add-card" (click)="addPet()"></ion-icon>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-fab right bottom>
+   <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="md-add"></ion-icon></button>
+ </ion-fab>
+
+ <div class="bottom-margin"></div>
+
+</ion-content>

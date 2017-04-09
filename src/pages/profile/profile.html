@@ -1,0 +1,362 @@
++-<ion-header>
+  <ion-navbar color="pink">
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<!-- Start Personal Information -->
+ <ion-card>
+    <ion-card-header>
+      <ion-icon name="ios-person"></ion-icon> {{ user.firstName }} {{ user.lastName }} <i>({{ user.maritalStatus }})</i>
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <ion-list no-lines>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-finn.png">
+            </ion-thumbnail>
+            <h2 class="address">{{ user.email }}</h2>
+            <h6><strong>{{user.gender}} • {{age}} • {{user.smokingHabits}} </strong></h6>
+            <h4><ion-icon name="call"></ion-icon> {{user.phoneNumber}}</h4>
+          </ion-item>
+        </ion-list>
+       <!-- <p class="address">{{ user.firstName }} {{ user.lastName }}</p><br>
+       <p><br>
+       {{ user.phoneNumber }}<br>
+       <p><strong>Male • 29 • {{ user.maritalStatus }} • {{ user.smokingStatus }} </strong></p> -->
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <!-- End Personal Information  -->
+
+<!-- Start Rental History -->
+  <ion-card *ngFor="let address of rentalhistory">
+    <ion-card-header>
+      <ion-icon name="ios-person"></ion-icon> Address
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row address">
+        <!-- <strong> -->
+          {{address.streetAddress}} {{address.unitNumber}} <br>
+          {{address.city }}, {{address.state}} <br> {{address.postCode}}
+        <!-- </strong> -->
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h4>Lived here</h4>
+          {{ address.moveInDate | date:'dd/MM/yyyy' }} - {{ address.moveOutDate | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div class="col">
+          <h3>Paid</h3>
+          <p>${{address.rentAmount}}/mo</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col">
+          <h3>Property Manager</h3>
+          <p>{{ address.pmFirstName }} {{ address.pmLastName }}</p>
+        </div>
+
+        <div class="col">
+          <p>Phone: {{ address.phoneNumber }}</p>
+          <p>Fax: {{ address.faxNumber }}</p>
+        </div>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+  <!-- End Address Hisotry -->
+
+  <!-- START HOUSEHOLD -->
+  <!-- Co-applicants -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="contacts"></ion-icon> Co-Applicant
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row" *ngFor="let coapplicant of coapplicants">
+        <div class="col">
+          <h3>Name</h3>
+          <p>{{ coapplicant.firstName }} {{ coapplicant.lastName }}</p>
+          <br>
+          <h3>Relationship</h3>
+          <p>{{ coapplicant.relationship }}</p>
+        </div>
+        <div class="col">
+          <h3>Phone</h3>
+          <p>{{ coapplicant.phoneNumber }}</p>
+          <br>
+          <h3>Age</h3>
+          <p>{{ coapplicant.age }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+<!-- Dependents -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="people"></ion-icon> Dependents
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row" *ngFor="let dependent of dependents">
+        <div class="col">
+          <h3>Name</h3>
+          <p>{{ dependent.fullName }}</p>
+        </div>
+        <div class="col">
+          <h3>Age</h3>
+          <p>{{ dependent.age }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Pets -->
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="paw"></ion-icon> Pets
+        <ion-icon name="md-create" class="item-add"></ion-icon>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row" *ngFor="let pet of pets">
+          <div class="col">
+            <h3>Name</h3>
+            <p>{{pet.name}}</p>
+          </div>
+          <div class="col">
+            <h3>Reg No.</h3>
+            <p>{{pet.registrationNumber}}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  <!-- END HOUSEHOLD -->
+  <!-- START EMPLOYMENT -->
+  <!-- Employment Information -->
+<ion-card>
+  <ion-card-header>
+    <ion-icon name="ion-coffee"></ion-icon> Employment
+    <ion-icon name="md-create" class="item-add"></ion-icon>
+  </ion-card-header>
+  <ion-card-content *ngFor="let employed of incomeemployment">
+    <div class="row">
+      <div class="col">
+        <h3>Employer</h3>
+        <p>{{employed.companyName}}</p>
+      </div>
+      <div class="col">
+        <h3>Position</h3>
+        <p>{{employed.position}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Employment Type</h3>
+        <p>{{employed.employmentType}}</p>
+      </div>
+
+      <div class="col">
+        <h3>Salary</h3>
+        <p>{{employed.salary}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Supervisor</h3>
+        <p>{{employed.managerFullName}}</p>
+      </div>
+
+      <div class="col">
+        <h3>Phone</h3>
+        <p>{{employed.phoneNumber}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Start Date</h3>
+        <p>{{ employed.startDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="col">
+        <h3>End Date</h3>
+        <p>N/A</p>
+      </div>
+    </div>
+
+  </ion-card-content>
+</ion-card>
+
+  <!-- Self-Employed -->
+  <ion-card>
+    <ion-card-header>
+      <ion-icon name="ion-coffee"></ion-icon> Self-Employed
+      <ion-icon name="md-create" class="item-add"></ion-icon>
+    </ion-card-header>
+    <ion-card-content *ngFor="let selfEmployed of incomeselfemployed">
+      <div class="row">
+        <div class="col">
+          <h3>Employer</h3>
+          <p>{{ selfEmployed.businessName }}</p>
+        </div>
+        <div class="col">
+          <h3>Position</h3>
+          <p>{{ selfEmployed.position }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>ABN Number</h3>
+          <p>{{ selfEmployed.abnNumber }}</p>
+        </div>
+        <div class="col">
+          <h3>ACN Number</h3>
+          <p>{{ selfEmployed.acnNumber }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h3>Salary</h3>
+          <p>{{ selfEmployed.salary }}</p>
+        </div>
+        <div class="col">
+          <h3>Start Date</h3>
+          <p>{{ selfEmployed.startDate | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- Retired -->
+    <ion-card>
+      <ion-card-header>
+        <ion-icon name="ion-coffee"></ion-icon> Retired Income
+        <ion-icon name="md-create" class="item-add"></ion-icon>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row" *ngFor="let retired of incomeretired">
+          <div class="col">
+            <h3>Pension Name</h3>
+            <p>{{ retired.pensionName }}</p>
+          </div>
+          <div class="col">
+            <h3>Pension No.</h3>
+            <p>{{ retired.pensionNumber }}</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <!-- END EMPLOYMENT INFORMATION -->
+
+    <!-- START DOCUMENTS -->
+    <ion-card>
+       <ion-card-header>
+         <ion-icon name="md-medkit"></ion-icon> Documents
+         <ion-icon name="md-create" class="item-add"></ion-icon>
+       </ion-card-header>
+       <ion-card-content>
+         <div class="row">
+           <div class="col">
+             Primary ID (50pts)<br />
+             Secondary ID (30pts)<br />
+           </div>
+           <div class="col">
+             Proof of Income (20pts)
+           </div>
+
+         </div>
+       </ion-card-content>
+     </ion-card>
+   <!-- END DOCUMENTS -->
+
+   <!-- START EMERGENCY CONTACT -->
+   <!-- Emergency Contact -->
+   <ion-card>
+     <ion-card-header>
+       <ion-icon name="md-medkit"></ion-icon> Emergency Contact
+       <ion-icon name="md-create" class="item-add"></ion-icon>
+     </ion-card-header>
+     <ion-card-content>
+       <div class="row">
+         <div class="col">
+           <h3>Name</h3>
+           <p>{{emergency.fullName}}</p>
+         </div>
+         <div class="col">
+           <h3>Relationship</h3>
+           <p>{{emergency.relationship}}</p>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="col">
+           <h3>Address</h3>
+           <p>{{emergency.streetAddress}}
+              {{ emergency.unitNumber }}
+              {{emergency.city}}, {{ emergency.state }} {{ emergency.postCode }}
+           </p>
+         </div>
+         <div class="col">
+           <h3>Phone</h3>
+           <p>{{ emergency.phoneNumber }}</p>
+         </div>
+       </div>
+     </ion-card-content>
+   </ion-card>
+ <!-- END EMERGENCY CONTACT -->
+
+  <!-- START UTILITIES -->
+    <!-- <ion-card>
+       <ion-card-header>
+         Utilities Requested
+       </ion-card-header>
+       <ion-card-content>
+         <ion-list>
+           <ion-item>
+             <ion-label>Electricity</ion-label>
+             <ion-toggle color="secondary" checked="{{ electricity }}"></ion-toggle>\
+           </ion-item>
+
+           <ion-item>
+             <ion-label>Gas</ion-label>
+             <ion-toggle color="secondary" checked="{{ gas }}"></ion-toggle>\
+           </ion-item>
+
+           <ion-item>
+             <ion-label>Cable</ion-label>
+             <ion-toggle color="secondary" checked=" {{ cable }}"></ion-toggle>\
+           </ion-item>
+
+           <ion-item>
+             <ion-label>Water</ion-label>
+             <ion-toggle color="secondary" checked="{{ water }}"></ion-toggle>\
+           </ion-item>
+         </ion-list>
+       </ion-card-content>
+     </ion-card> -->
+  <!-- END UTILITIES -->
+
+     <ion-fab right bottom>
+      <button ion-fab color="pink" (click)="newApplicationModal()"><ion-icon name="ios-send"></ion-icon></button>
+    </ion-fab>
+
+  </ion-content>
