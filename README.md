@@ -3,9 +3,9 @@
 Hybrid mobile app that simplifies the rental application process Edit
 Add topics
 
-# Installation Instructions
+# Installation
 Git clone https://github.com/oneuptim/rentalQ.git
 
-Cd into dir
-Run npm install
-Enjoy
+Cd into dir <br>
+Run npm install <br>
+Enjoy <br>
