@@ -1,4 +1,4 @@
-# rentalQ
+# Rental Q
 
 Hybrid mobile app that simplifies the rental application process Edit
 Add topics
