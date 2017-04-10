@@ -18,7 +18,7 @@
     <ion-card *ngFor="let address of rentalHistory">
       <ion-card-header>
         <ion-icon name="ios-person"></ion-icon> Address
-        <ion-icon name="md-create" class="item-add"></ion-icon>
+        <ion-icon name="md-create" class="item-add" (click)="editAddress(address.id)"></ion-icon>
       </ion-card-header>
       <ion-card-content>
         <div class="row address">
@@ -58,7 +58,7 @@
     </ion-card>
 
   <ion-fab right bottom>
-   <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="md-add"></ion-icon></button>
+   <button ion-fab color="pink" (click)="addRentalHistory()"><ion-icon name="md-add"></ion-icon></button>
  </ion-fab>
 
  <div class="bottom-margin"></div>

@@ -21,7 +21,7 @@ import { Storage } from '@ionic/storage'; // Storage imported here after declara
 })
 export class LoginPage {
 
-  username:string = 'jack@test.com';
+  username:string = 'jenny@test.com';
   password:string = 'password';
   auth_type:string = "N/A";
   is_auth_error:boolean = false;

@@ -22,7 +22,10 @@ import { EmergencyAddPage } from '../pages/my-account/emergency-add';
 
 import { OccupantsPage } from '../pages/occupants/occupants';
 import { RentalCheckPage } from '../pages/rental-check/rental-check';
+
 import { RentalHistoryPage } from '../pages/rental-history/rental-history';
+import { RentalHistoryAddPage } from '../pages/rental-history/rental-history-add';
+
 import { SettingsPage } from '../pages/settings/settings';
 import { UtilitiesPage } from '../pages/utilities/utilities';
 import { OffersPage } from '../pages/offers/offers';
@@ -52,6 +55,7 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
     OccupantsPage,
     RentalCheckPage,
     RentalHistoryPage,
+    RentalHistoryAddPage,
     SettingsPage,
     UtilitiesPage,
     ApplicationsPage,
@@ -81,6 +85,7 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
     OccupantsPage,
     RentalCheckPage,
     RentalHistoryPage,
+    RentalHistoryAddPage,
     SettingsPage,
     UtilitiesPage,
     ApplicationsPage,
