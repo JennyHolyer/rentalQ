@@ -3,18 +3,18 @@
     <ion-title>
       Submit Application
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <span ion-text color="primary" showWhen="ios">Cancel</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
       <button ion-button type="submit" (click)="save()">
         <span ion-text color="white" showWhen="ios">Save</span>
         <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -22,25 +22,26 @@
   <!-- START PROPERTY MANAGER'S DETAILS -->
   <ion-card>
      <ion-card-header>
-       <ion-icon name="md-medkit"></ion-icon> Property Manager's Details
+       <ion-icon name="md-person"></ion-icon> Property Manager's Details
        <ion-icon name="md-create" class="item-add"></ion-icon>
      </ion-card-header>
      <ion-card-content>
        <ion-list no-lines>
          <ion-item>
            <ion-label floating>Full Name</ion-label>
-           <!-- <ion-input type="text" [(ngModel)]="emergency.fullName" name="fullName"></ion-input> -->
            <ion-input type="text" name="fullName" [value]="fullName" (input)="fullName = $event.target.value"></ion-input>
          </ion-item>
          <ion-item>
            <ion-label floating>Email</ion-label>
-           <!-- <ion-input type="text" [(ngModel)]="emergency.relationship" name="relationship"></ion-input> -->
-           <ion-input type="email" name="relationship" [value]="relationship" (input)="relationship = $event.target.value"></ion-input>
+           <ion-input type="email" name="email" [value]="email" (input)="email = $event.target.value"></ion-input>
          </ion-item>
          <ion-item>
            <ion-label floating>Phone Number</ion-label>
-           <!-- <ion-input type="number" [(ngModel)]="emergency.phoneNumber" name="phoneNumber"></ion-input> -->
            <ion-input type="number" name="phoneNumber" [value]="phoneNumber" (input)="phoneNumber = $event.target.value"></ion-input>
+         </ion-item>
+         <ion-item>
+           <ion-label floating>Fax Number</ion-label>
+           <ion-input type="number" name="faxNumber" [value]="faxNumber" (input)="faxNumber = $event.target.value"></ion-input>
          </ion-item>
        </ion-list>
      </ion-card-content>
@@ -50,7 +51,7 @@
  <!-- START OF PROPERTY INFO -->
  <ion-card>
     <ion-card-header>
-      <ion-icon name="md-medkit"></ion-icon> Property Details
+      <ion-icon name="md-person"></ion-icon> Property Details
       <ion-icon name="md-create" class="item-add"></ion-icon>
     </ion-card-header>
     <ion-card-content>
@@ -83,7 +84,7 @@
       </ion-list>
     </ion-card-content>
     <div class="bottom-margin"></div>
-      <button ion-button full color="secondary" (click)="save()">Submit Application</button>
+      <button ion-button full color="secondary" (click)="submitApplication()">Submit Application</button>
     <div class="bottom-margin"></div>
   </ion-card>
 

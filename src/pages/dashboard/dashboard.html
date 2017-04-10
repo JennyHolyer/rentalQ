@@ -14,13 +14,13 @@
     <div class="col">
       <button ion-button color="primary" icon-left full [navPush]="applicationsPage">
         <ion-icon name="send"></ion-icon>
-        5 Submitted
+        {{applications}} Submitted
       </button>
     </div>
     <div class="col">
       <button ion-button color="secondary" icon-left full [navPush]="offersPage">
         <ion-icon name="md-checkmark-circle-outline"></ion-icon>
-        3 Approved
+        {{approvedCount}} Approved
       </button>
     </div>
   </ion-row>

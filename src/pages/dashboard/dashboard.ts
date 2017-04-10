@@ -26,6 +26,10 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'dashboard.html'
 })
 export class DashboardPage {
+  applications = [];
+  approved = [];
+  approvedCount:number = 0;
+  status:string = '';
   applicationsPage = ApplicationsPage;
   profilePage = ProfilePage;
   documentsPage = DocumentsPage;
@@ -54,9 +58,41 @@ constructor(public loadingCtrl: LoadingController, public navCtrl: NavController
 
    backand.user.getUserDetails(false)
   .then(res => {
-    this.user = res.data
     this.loggedUser = res.data.userId
     console.log(res.data, "<==== 3. DASHBOARD GET USER DETAILS");
+    this.backand.object.getOne("users", this.loggedUser, {
+      "deep" : true })
+      .then(res => {
+        this.user = res.data
+        this.applications = res.data.applicationinformation.length
+        this.approved = res.data.applicationinformation
+        console.log(res.data, "<==== 5. APPLICATION GET USER DETAILS");
+        console.log(this.applications, "<======== Logged Users Applications")
+
+        // this.approved = []
+        console.log(this.approved, "<=== APPROVED: Outside for loop");
+        console.log(this.approved[0].status, "<=== STATUS: Outside for loop");
+
+
+        /////////////////////////////////////////////////////
+        //   GRAB ALL APPLICATIONS WITH STATUS APPROVED! ///
+        ///////////////////////////////////////////////////
+        let approvedArr = []
+        for(let i = 0; i < this.approved.length; i++) {
+          console.log(this.approved[i].status, "$$$$$$$$$$$$$$$");
+          if (this.approved[i].status == "Approved") {
+            approvedArr.push(this.approved[i])
+          }
+        }
+        console.log(approvedArr, "<<<<<< APPROVED ARRAY");
+        this.approvedCount = approvedArr.length
+        console.log(this.approvedCount, '<<<< Approved Count');
+        return approvedArr;
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+    // Show user's applications in order of submission
   })
   .catch(err => {
     console.log(err);

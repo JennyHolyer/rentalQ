@@ -22,16 +22,20 @@ import { ViewController } from 'ionic-angular';
 export class SubmitApplicationPage {
 
   loggedUser:string = '';
-  emergency = {};
   user = {};
-  fullName:string = '';
-  relationship:string = '';
-  streetAddress:string = '';
-  unitNumber:string = '';
-  city:string = '';
-  state:string = '';
-  postCode:string = '';
-  phoneNumber:string = '';
+
+  streetAddress:string = '456 W Arlington Lane';
+  unitNumber:string = '848';
+  city:string = 'Rancho';
+  state:string = 'CA';
+  postCode:string = '85548';
+
+  fullName:string = 'Linda Johnson';
+  email:string = 'tim@stancebranding.com';
+  phoneNumber:string = '8789874878';
+  faxNumber:string = '2547898789';
+  status:string = 'Received';
+  rentalCheckComplete:boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
@@ -57,7 +61,6 @@ export class SubmitApplicationPage {
       "deep" : true })
       .then(res => {
         this.user = res.data
-        this.emergency = res.data.emergency[1]
     })
     .catch(err => {
       console.log(err);
@@ -70,24 +73,29 @@ export class SubmitApplicationPage {
   }
 
 
-  save() {
-    console.log("Save Method Entered")
-    this.backand.object.create('emergency', {
-     'fullName': this.fullName, 'relationship': this.relationship, 'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'phoneNumber': this.phoneNumber, 'user': 1
+  // Submit New Application
+  public submitApplication(){
+    console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    console.log("Save Method Entered in Application Submission")
+    this.backand.object.create('applicationInformation', {
+     'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'fullName': this.fullName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'rentalCheckComplete': this.rentalCheckComplete, 'status': this.status, 'user': this.loggedUser
     })
     .then(data => {
-     alert('Emergency Successfully Added');
-      this.fullName = this.relationship = this.streetAddress = this.unitNumber = this.city = this.state = this.postCode = this.phoneNumber = '';
-      this.dismiss();
+     alert('Application Successfully Submitted');
+     this.streetAddress = this.unitNumber = this.city = this.state = this.postCode = this.fullName = this.email = this.phoneNumber = this.faxNumber = '';
+
+     this.dismiss();
+
     })
     .catch(error => {
      console.log(error, '<===== data from backend save handler')
     })
- } // End Submit Application Function
+ } // End application submit
 
  dismiss() {
   this.viewCtrl.dismiss();
 }
+
 
 
 }

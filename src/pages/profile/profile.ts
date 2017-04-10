@@ -8,6 +8,8 @@ import { SubmitApplicationPage } from '../profile/submit-application';
 import { ModalController } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
 import { ActionSheetController } from 'ionic-angular';
+import { ApplicationsPage } from '../applications/applications';
+
 
 @Component({
   selector: 'page-profile',
@@ -47,6 +49,7 @@ export class ProfilePage {
      backand.user.getUserDetails(false)
     .then(res => {
       this.loggedUser = res.data.userId
+      console.log(this.loggedUser, "<%%% LOGGED USER!")
 
       this.backand.object.getOne("users", this.loggedUser, {
         "deep" : true })

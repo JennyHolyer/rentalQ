@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
-
+import { ActionSheetController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 /*
   Generated class for the Applications page.
@@ -18,8 +19,9 @@ export class ApplicationsPage {
 
   user = {};
   loggedUser:string = '';
+  applications = [];
 
-  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService) {
+  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -30,9 +32,18 @@ export class ApplicationsPage {
 
     backand.user.getUserDetails(false)
    .then(res => {
-     this.user = res.data
      this.loggedUser = res.data.userId
-     console.log(res.data, "<==== 5. APPLICATION GET USER DETAILS");
+     this.backand.object.getOne("users", this.loggedUser, {
+       "deep" : true })
+       .then(res => {
+         this.user = res.data
+         this.applications = res.data.applicationinformation
+     })
+     .catch(err => {
+       console.log(err);
+     }); // End of user object fetch
+     // Show user's applications in order of submission
+
    })
    .catch(err => {
      console.log(err);
@@ -46,5 +57,8 @@ export class ApplicationsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ApplicationsPage');
   }
+
+
+
 
 }

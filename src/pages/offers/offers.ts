@@ -20,6 +20,8 @@ import {AlertController} from 'ionic-angular';
 export class OffersPage {
   loggedUser:string = '';
   user = {};
+  approved = [];
+  applications = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
 
@@ -32,9 +34,29 @@ export class OffersPage {
 
     backand.user.getUserDetails(false)
    .then(res => {
-     this.user = res.data
      this.loggedUser = res.data.userId
      console.log(res.data, "<==== 12. OFFERS GET USER DETAILS");
+     this.backand.object.getOne("users", this.loggedUser, {
+       "deep" : true })
+       .then(res => {
+         this.user = res.data
+         this.applications = res.data.applicationinformation
+         /////////////////////////////////////////////////////
+         //   GRAB ALL APPLICATIONS WITH STATUS APPROVED! ///
+         ///////////////////////////////////////////////////
+         this.approved = []
+         for(let i = 0; i < this.applications.length; i++) {
+           console.log(this.applications[i].status, "$$$$$$$$$$$$$$$");
+           if (this.applications[i].status == "Approved") {
+             this.approved.push(this.applications[i])
+           }
+         }
+         return this.approved;
+     })
+     .catch(err => {
+       console.log(err);
+     }); // End of user object fetch
+     // Show user's applications in order of submission
    })
    .catch(err => {
      console.log(err);

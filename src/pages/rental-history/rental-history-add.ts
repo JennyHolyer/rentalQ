@@ -31,8 +31,8 @@ export class RentalHistoryAddPage {
   isCurrent:boolean = false;
 
   public date = {
-    moveInDate: '',
-    moveOutDate: ''
+    moveInDate: '2015-01-31',
+    moveOutDate: '2017-02-20'
   }
 
   pmFirstName:string = 'Rudy';
@@ -80,7 +80,7 @@ export class RentalHistoryAddPage {
 
   save() {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    console.log("Save Method Entered in Renta History")
+    console.log("Save Method Entered in Rental History")
     console.log(this.date.moveInDate, "MOVE IN", this.date.moveOutDate, "<== MOVE OUT")
     this.backand.object.create('rentalHistory', {
      'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'moveInDate': this.date.moveInDate, 'moveOutDate': this.date.moveOutDate, 'rentAmount': this.rentAmount, 'isCurrent': this.isCurrent, 'pmFirstName': this.pmFirstName, 'pmLastName': this.pmLastName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'user': this.loggedUser
