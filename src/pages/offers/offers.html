@@ -18,7 +18,7 @@
     <ion-item-sliding *ngFor="let approved of approved">
       <ion-item>
         <p> <ion-icon name="checkmark-circle" color="secondary"></ion-icon> {{approved.status}} on {{approved.createdAt | date:'dd/MM/yyyy'}}</p>
-        <h2>{{approved.streetAddress}} {{approved.unitNumber}} {{approved.city}}</h2>
+        <h3>{{approved.streetAddress}} {{approved.unitNumber}} {{approved.city}}, {{approved.state}}</h3>
         <p><ion-icon name="person"></ion-icon> {{approved.fullName}} <ion-icon name="mail"></ion-icon> {{approved.email}}</p>
       </ion-item>
       <ion-item-options side="right">

@@ -17,7 +17,7 @@
     <ion-item-sliding *ngFor="let application of applications">
       <ion-item>
         <p> <ion-icon name="checkmark-circle" color="secondary"></ion-icon> {{application.status}} on {{application.createdAt | date:'dd/MM/yyyy'}}</p>
-        <h2>{{application.streetAddress}} {{application.unitNumber}} {{application.city}}</h2>
+        <h3>{{application.streetAddress}} {{application.unitNumber}} {{application.city}}, {{application.state}}</h3>
         <p><ion-icon name="person"></ion-icon> {{application.fullName}} <ion-icon name="mail"></ion-icon> {{application.email}}</p>
       </ion-item>
       <ion-item-options side="right">

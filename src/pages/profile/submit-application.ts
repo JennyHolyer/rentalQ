@@ -34,7 +34,7 @@ export class SubmitApplicationPage {
   email:string = 'tim@stancebranding.com';
   phoneNumber:string = '8789874878';
   faxNumber:string = '2547898789';
-  status:string = 'Received';
+  status:string = 'Approved';
   rentalCheckComplete:boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
@@ -78,8 +78,7 @@ export class SubmitApplicationPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Application Submission")
     this.backand.object.create('applicationInformation', {
-     'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'fullName': this.fullName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'rentalCheckComplete': this.rentalCheckComplete, 'status': this.status, 'user': this.loggedUser
-    })
+     'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'fullName': this.fullName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'rentalCheckComplete': this.rentalCheckComplete, 'status': this.status, 'user': 10})
     .then(data => {
      alert('Application Successfully Submitted');
      this.streetAddress = this.unitNumber = this.city = this.state = this.postCode = this.fullName = this.email = this.phoneNumber = this.faxNumber = '';
