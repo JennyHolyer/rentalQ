@@ -7,19 +7,20 @@
 </ion-header>
 
 <ion-content padding>
+  <h4>Swipe left when completed</h4>
   <ion-list>
     <ion-item-sliding *ngFor="let alert of alerts">
       <ion-item>
         <ion-avatar item-left>
-          <img src="{{alert.image}}">
+          <ion-icon name="alert"></ion-icon> 
         </ion-avatar>
-        <h2>{{alert.title}}</h2>
-        <p>{{alert.description}}</p>
+        <h3>Information Needed</h3>
+        <p>{{alert.note}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger">
+        <button ion-button color="secondary">
           <ion-icon name="Delete"></ion-icon>
-          Delete
+          Completed
         </button>
       </ion-item-options>
     </ion-item-sliding>

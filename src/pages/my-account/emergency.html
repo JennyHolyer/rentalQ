@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button type="submit" (click)="save(emergency.id)">
+      <button ion-button type="submit" (click)="saveForm(emergency.id)">
         <span ion-text color="white" showWhen="ios">Save</span>
         <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
       </button>
@@ -21,48 +21,59 @@
 
 <ion-content>
 
+  <p>Name: {{timbo.fullName}}</p>
+  <p>Rel: {{timbo.relationship}}</p>
+  <p>Address: {{timbo.streetAddress}}</p>
+  <p>Unit: {{timbo.unitNumber}}</p>
+  <p>City: {{timbo.city}}</p>
+  <p>State: {{timbo.state}}</p>
+  <p>Code: {{timbo.postCode}}</p>
+  <p>Phone: {{timbo.phoneNumber}}</p>
+
   <!-- Edit Emergency Contact -->
+  <form (ngSubmit)="saveForm(emergency.id)">
   <ion-list>
     <ion-item>
       <ion-label stacked>Full Name</ion-label>
-      <ion-input type="text" name="fullName" [value]="emergency.fullName" (input)="fullName = $event.target.value"></ion-input>
+      <!-- <ion-input type="text" name="fullName" [value]="emergency.fullName" (input)="fullName = $event.target.value"></ion-input> -->
+      <ion-input type="text" name="fullName" [value]="emergency.fullName" [(ngModel)]="timbo.fullName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Relationship</ion-label>
-      <ion-input type="text" name="relationship" [value]="emergency.relationship" (input)="relationship = $event.target.value"></ion-input>
+      <!-- <ion-input type="text" name="relationship" [value]="emergency.relationship" (input)="relationship = $event.target.value"></ion-input> -->
+      <ion-input type="text" name="relationship" [value]="emergency.relationship" [(ngModel)]="timbo.relationship"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Street Address</ion-label>
-      <ion-input type="text" name="streetAddress" [value]="emergency.streetAddress" (input)="streetAddress = $event.target.value"></ion-input>
+      <ion-input type="text" name="streetAddress" [value]="emergency.streetAddress" [(ngModel)]="timbo.streetAddress"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Unit Number</ion-label>
-      <ion-input type="text" name="unitNumber" [value]="emergency.unitNumber" (input)="unitNumber = $event.target.value"></ion-input>
+      <ion-input type="text" name="unitNumber" [value]="emergency.unitNumber" [(ngModel)]="timbo.unitNumber"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>City</ion-label>
-      <ion-input type="text" name="city" [value]="emergency.city" (input)="city = $event.target.value"></ion-input>
+      <ion-input type="text" name="city" [value]="emergency.city" [(ngModel)]="timbo.city"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>State</ion-label>
-      <ion-input type="text" name="state" [value]="emergency.state" (input)="state = $event.target.value"></ion-input>
+      <ion-input type="text" name="state" [value]="emergency.state" [(ngModel)]="timbo.state"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Post Code</ion-label>
-      <ion-input type="text" name="postCode" [value]="emergency.postCode" (input)="postCode = $event.target.value"></ion-input>
+      <ion-input type="text" name="postCode" [value]="emergency.postCode" [(ngModel)]="timbo.postCode"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Phone Number</ion-label>
-      <ion-input type="number" name="phoneNumber" [value]="emergency.phoneNumber" (input)="phoneNumber = $event.target.value"></ion-input>
+      <ion-input type="number" name="phoneNumber" [value]="emergency.phoneNumber" [(ngModel)]="timbo.phoneNumber"></ion-input>
     </ion-item>
   </ion-list>
 
-  <!-- <ion-fab right bottom>
-  <button ion-fab color="pink"><ion-icon name="md-add"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab><ion-icon name="md-medkit"></ion-icon></button>
-      <button ion-fab><ion-icon name="ios-person"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab> -->
+  <!-- <button ion-button type="submit">
+    <span ion-text color="white" showWhen="ios">Update</span>
+    <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
+  </button> -->
+
+</form>
 
 </ion-content>

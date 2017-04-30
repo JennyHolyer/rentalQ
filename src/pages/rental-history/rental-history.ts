@@ -93,6 +93,11 @@ let actionSheet = this.actionSheetCtrl.create({
       text: 'Edit',
       handler: () => {
         console.log('Edit Clicked');
+        // addRentalHistory() {
+        let modal = this.modalCtrl.create(RentalHistoryAddPage);
+        console.log(id, "This is the ID in the modal")
+        modal.present();
+      // }
         // this.addressEditModal(id)
         // console.log(id, "<======= THIS IS ID")
       }
@@ -110,11 +115,11 @@ actionSheet.present();
 
 
 // addressEditModal(id) {
-//   this.backand.object.getOne("emergency", id, {
+//   this.backand.object.getOne("rentalHistory", id, {
 //     "deep" : false })
 //     .then(res => {
-//       this.emergencyObject = res.data
-//       let modal = this.modalCtrl.create(EmergencyPage, this.emergencyObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+//       this.addressObject = res.data
+//       let modal = this.modalCtrl.create(RentalHistoryEditPage, this.addressObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
 //       modal.present();
 //   })
 //   .catch(err => {

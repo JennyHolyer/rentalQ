@@ -33,6 +33,17 @@ export class EmergencyPage {
   phoneNumber:string = '';
   loggedUser:string = '';
 
+  timbo = {
+    fullName: '',
+    relationship: '',
+    streetAddress: '',
+    unitNumber: '',
+    city: '',
+    state: '',
+    postCode: '',
+    phoneNumber: ''
+  };
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
     this.objectVariableToPassID = this.navParams.get('id'); // <=== GRABBING ID FROM PARAMETER BEING PASSED FROM MODAL IN PREVIOUS PAGE
@@ -62,6 +73,14 @@ export class EmergencyPage {
         "deep" : false })
         .then(res => {
           this.emergency = res.data
+          this.timbo.fullName = res.data.fullName
+          this.timbo.relationship = res.data.relationship,
+          this.timbo.streetAddress = res.data.streetAddress,
+          this.timbo.unitNumber = res.data.unitNumber,
+          this.timbo.city = res.data.city,
+          this.timbo.state = res.data.state,
+          this.timbo.postCode = res.data.postCode,
+          this.timbo.phoneNumber = res.data.phoneNumber,
           console.log(this.emergency, "<==== SINGLE Users emergency OBJECT")
         })
         .catch(err => {
@@ -73,9 +92,6 @@ export class EmergencyPage {
       console.log(err);
     }); // End of user object fetch
 
-
-
-
   } // END OF CONSTRUCTOR
 
   ionViewDidLoad() {
@@ -84,21 +100,21 @@ export class EmergencyPage {
 
 
   // Update Emergency Object!
-  save(id) {
+  saveForm(id) {
     console.log("Save Method Entered")
     let options = {
       returnObject: true
     };
 
     let data = {
-     fullName: this.fullName,
-     relationship: this.relationship,
-     streetAddress: this.streetAddress,
-     unitNumber: this.unitNumber,
-     city: this.city,
-     state: this.state,
-     postCode: this.postCode,
-     phoneNumber: this.phoneNumber,
+     fullName: this.timbo.fullName,
+     relationship: this.timbo.relationship,
+     streetAddress: this.timbo.streetAddress,
+     unitNumber: this.timbo.unitNumber,
+     city: this.timbo.city,
+     state: this.timbo.state,
+     postCode: this.timbo.postCode,
+     phoneNumber: this.timbo.phoneNumber,
      user: this.loggedUser
     };
 
@@ -114,39 +130,6 @@ export class EmergencyPage {
      console.log(error, '<===== data from backend save handler')
     })
  }
-
-
-
-
-  //
-  //   // Emergency Edit or Delete
-  //   editEmergency() {
-  //   console.log("Emergency Button Clicked")
-  //   let actionSheet = this.actionSheetCtrl.create({
-  //     title: '',
-  //     buttons: [
-  //       {
-  //         text: 'Delete',
-  //         role: 'destructive',
-  //         handler: () => {
-  //           console.log('Delete');
-  //         }
-  //       },{
-  //         text: 'Edit',
-  //         handler: () => {
-  //           console.log('Edit Clicked');
-  //         }
-  //       },{
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           console.log('Cancel clicked');
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   actionSheet.present();
-  // }
 
   dismiss() {
    this.viewCtrl.dismiss();
