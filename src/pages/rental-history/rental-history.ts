@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { RentalHistoryAddPage } from './rental-history-add';
+import { RentalHistoryEditPage } from './rental-history-edit';
 import { ActionSheetController } from 'ionic-angular';
 
 /*
@@ -23,6 +24,7 @@ export class RentalHistoryPage {
 
   rentalHistory: any[] = [];
   user = {};
+  address = {};
   loggedUser:string = '';
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController) {
@@ -69,8 +71,8 @@ export class RentalHistoryPage {
 }
 
 // Address Edit or Delete
-editAddress(id) {
-console.log("Address Edit Button Clicked")
+editRentalHistory(id) {
+console.log("Address Button Clicked")
 let actionSheet = this.actionSheetCtrl.create({
   title: '',
   buttons: [
@@ -79,26 +81,21 @@ let actionSheet = this.actionSheetCtrl.create({
       role: 'destructive',
       handler: () => {
         console.log('Delete');
-        this.backand.object.remove("rentalHistory", id, {
+        this.backand.object.remove("Address", id, {
           "deep" : false })
           .then(res => {
-            alert('Address Successfully Deleted!');
+            alert('Successfully Deleted!');
             // console.log(res, "<==== OBJECT REMOVED *******************");
         })
         .catch(err => {
           console.log(err);
-        }); // End of emergency object delete
+      }); // End of address object delete
       }
     },{
       text: 'Edit',
       handler: () => {
         console.log('Edit Clicked');
-        // addRentalHistory() {
-        let modal = this.modalCtrl.create(RentalHistoryAddPage);
-        console.log(id, "This is the ID in the modal")
-        modal.present();
-      // }
-        // this.addressEditModal(id)
+        this.addressModal(id)
         // console.log(id, "<======= THIS IS ID")
       }
     },{
@@ -112,14 +109,66 @@ let actionSheet = this.actionSheetCtrl.create({
 });
 actionSheet.present();
 }
+addressModal(id) {
+  this.backand.object.getOne("rentalHistory", id, {
+    "deep" : false })
+    .then(res => {
+      this.address = res.data
+      let modal = this.modalCtrl.create(RentalHistoryEditPage, this.address); // <== HAVE TO PASS OBJECT & NOT AN ID!
+      modal.present();
+  })
+  .catch(err => {
+    console.log(err);
+  }); // End of user object fetch
+
+} // End of emergencyModal()
+
+// editAddress(id) {
+// console.log("Address Edit Button Clicked")
+// let actionSheet = this.actionSheetCtrl.create({
+//   title: '',
+//   buttons: [
+//     {
+//       text: 'Delete',
+//       role: 'destructive',
+//       handler: () => {
+//         console.log('Delete');
+//         this.backand.object.remove("rentalHistory", id, {
+//           "deep" : false })
+//           .then(res => {
+//             alert('Address Successfully Deleted!');
+//             // console.log(res, "<==== OBJECT REMOVED *******************");
+//         })
+//         .catch(err => {
+//           console.log(err);
+//         }); // End of emergency object delete
+//       }
+//     },{
+//       text: 'Edit',
+//       handler: () => {
+//         console.log('Edit Clicked');
+//         // this.addressEditModal(id)
+//         // console.log(id, "<======= THIS IS ID")
+//       }
+//     },{
+//       text: 'Cancel',
+//       role: 'cancel',
+//       handler: () => {
+//         console.log('Cancel clicked');
+//       }
+//     }
+//   ]
+// });
+// actionSheet.present();
+// }
 
 
 // addressEditModal(id) {
-//   this.backand.object.getOne("rentalHistory", id, {
+//   this.backand.object.getOne("emergency", id, {
 //     "deep" : false })
 //     .then(res => {
-//       this.addressObject = res.data
-//       let modal = this.modalCtrl.create(RentalHistoryEditPage, this.addressObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+//       this.emergencyObject = res.data
+//       let modal = this.modalCtrl.create(EmergencyPage, this.emergencyObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
 //       modal.present();
 //   })
 //   .catch(err => {

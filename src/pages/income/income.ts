@@ -5,6 +5,11 @@ import {ToastController} from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
 import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { EmploymentsAddPage } from './employments-add';
+import { SelfEmployedAddPage } from './self-employed-add';
+import { RetiredAddPage } from './retired-add';
+
 
 /*
   Generated class for the Income page.
@@ -23,7 +28,7 @@ export class IncomePage {
   public incomeselfemployed: any[] = [];
   public incomeretired: any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public modalCtrl: ModalController, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -50,7 +55,7 @@ export class IncomePage {
         console.log(err);
       }); // End of user object fetch
 
-      
+
     })
     .catch(err => {
       console.log(err);
@@ -63,5 +68,21 @@ export class IncomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad IncomePage');
   }
+
+  addEmployment() {
+      let modal = this.modalCtrl.create(EmploymentsAddPage);
+      modal.present();
+  }
+
+  addSelfEmployed() {
+      let modal = this.modalCtrl.create(SelfEmployedAddPage);
+      modal.present();
+  }
+  addRetired() {
+      let modal = this.modalCtrl.create(RetiredAddPage);
+      modal.present();
+  }
+
+
 
 }

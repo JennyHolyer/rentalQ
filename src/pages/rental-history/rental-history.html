@@ -16,7 +16,7 @@
 <ion-content>
   <!-- Current Address -->
     <ion-card *ngFor="let address of rentalHistory">
-      <ion-card-header (click)="editAddress(address.id)">
+      <ion-card-header (click)="editRentalHistory(address.id)">
         <ion-icon name="ios-person"></ion-icon> Address
         <ion-icon name="md-create" class="item-add"></ion-icon>
       </ion-card-header>

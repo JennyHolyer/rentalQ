@@ -72,15 +72,25 @@
             <p>{{pet.registrationNumber}}</p>
           </div>
           <div class="col-sm-9">
-            <ion-icon name="md-create" class="item-add-card" (click)="editPet(pet.id)"></ion-icon>
+            <ion-icon name="md-create" class="item-add-card" (click)="addPet()"></ion-icon>
           </div>
         </div>
       </ion-card-content>
     </ion-card>
 
-  <ion-fab right bottom>
+  <!-- <ion-fab right bottom>
    <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="md-add"></ion-icon></button>
+ </ion-fab> -->
+
+ <ion-fab right bottom>
+ <button ion-fab color="pink"><ion-icon name="md-add"></ion-icon></button>
+   <ion-fab-list side="top">
+     <button ion-fab (click)="addPet()"><ion-icon name="paw"></ion-icon></button>
+     <button ion-fab (click)="addDependent()"><ion-icon name="people"></ion-icon></button>
+     <button ion-fab (click)="addCoApplicant()"><ion-icon name="contacts"></ion-icon></button>
+   </ion-fab-list>
  </ion-fab>
+
 
  <div class="bottom-margin"></div>
 
