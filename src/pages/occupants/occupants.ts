@@ -67,7 +67,7 @@ export class OccupantsPage {
        .catch(err => {
          console.log(err);
        }); // End of user object fetch
-       
+
      })
      .catch(err => {
        console.log(err);
@@ -79,6 +79,20 @@ export class OccupantsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OccupantsPage');
+  }
+
+  public editPet(id) {
+    this.backand.object.getOne("pets", id, {
+    "deep" : false })
+    .then(res => {
+      // id:15
+      // name:"Riki"
+      // type:"Pigeon"
+      // user:"10"
+    })
+    .catch(err => {
+
+    })
   }
 
   public addPet() {
