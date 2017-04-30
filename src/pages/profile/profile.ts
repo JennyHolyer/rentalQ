@@ -55,6 +55,7 @@ export class ProfilePage {
         "deep" : true })
         .then(res => {
           this.user = res.data
+          console.log(this.user, "<== USER OBJECT")
           console.log(res.data.dateOfBirth, "<===== THIS.DATEOFBIRTH")
           this.coapplicants = res.data.coapplicants
           this.dependents = res.data.dependents

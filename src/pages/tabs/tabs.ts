@@ -15,8 +15,7 @@ export class TabsPage {
   tab2Root: any = AlertsPage;
   tab3Root: any = ProfilePage;
   tab4Root: any = MenuPage;
-  alertsCount = '';
-  
+
   constructor() {
 
   }

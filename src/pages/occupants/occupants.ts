@@ -5,6 +5,12 @@ import {ToastController} from 'ionic-angular';
 import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
 import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
+import { CoApplicantsAddPage } from './coapplicants-add';
+import { DependentsAddPage } from './dependents-add';
+import { PetsAddPage } from './pets-add';
+
+
 
 /*
   Generated class for the Occupants page.
@@ -27,7 +33,7 @@ export class OccupantsPage {
   public pets: any[] = [];
   loggedUser:string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public modalCtrl: ModalController, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -81,70 +87,71 @@ export class OccupantsPage {
     console.log('ionViewDidLoad OccupantsPage');
   }
 
-  public editPet(id) {
-    this.backand.object.getOne("pets", id, {
-    "deep" : false })
-    .then(res => {
-      // id:15
-      // name:"Riki"
-      // type:"Pigeon"
-      // user:"10"
-    })
-    .catch(err => {
+  addCoApplicant() {
+  let modal = this.modalCtrl.create(CoApplicantsAddPage);
+  modal.present();
+}
 
-    })
-  }
+    addDependent() {
+        let modal = this.modalCtrl.create(DependentsAddPage);
+        modal.present();
+    }
 
-  public addPet() {
-  let baseURL = 'https://api.backand.com/1/objects/';
-  let objectName = 'pets/';
-  let apiURL = baseURL + objectName;
-  console.log(apiURL, "<==== BASE URL");
+    addPet() {
+        let modal = this.modalCtrl.create(PetsAddPage);
+        modal.present();
+    }
+
+  // public addPet() {
+  // let baseURL = 'https://api.backand.com/1/objects/';
+  // let objectName = 'pets/';
+  // let apiURL = baseURL + objectName;
+  // console.log(apiURL, "<==== BASE URL");
   // let API = this.backand.getApiUrl();
 
-  let alert = this.alertController.create({
-    title: 'Add Pet',
-    inputs: [
-      {
-        name: 'name',
-        placeholder: 'Pet Full Name'
-      },
-      {
-        name: 'type',
-        placeholder: 'Type (e.g.Dog, Cat)',
-      },
-      {
-        name: 'registrationNumber',
-        placeholder: 'Pet Registration No.',
-      }
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: data => {
-          console.log('Cancel Clicked');
-        }
-      },
-      {
-        text: 'Save',
-        role: 'put',
-        handler: data => {
-          console.log('Save Clicked');
-          this.backand.object.create('pets', {
-            'name': data.name, 'registrationNumber': data.registrationNumber, 'type': data.type, 'user': 1
-          })
-          .then(data => {
-            console.log(data, '<===== data from backend PROMISE')
-          })
-          .catch(error => { })
-          // this.http.get('https://api.backand.com/1/objects/items/1').map(res => res.json().data);
-          console.log(data, '<===== data from backend save handler')
-        }
-      }
-    ]
-  });
-  alert.present();
-  }
-
+//   let alert = this.alertController.create({
+//     title: 'Add Pet',
+//     inputs: [
+//       {
+//         name: 'name',
+//         placeholder: 'Pet Full Name'
+//       },
+//       {
+//         name: 'type',
+//         placeholder: 'Type (e.g.Dog, Cat)',
+//       },
+//       {
+//         name: 'registrationNumber',
+//         placeholder: 'Pet Registration No.',
+//       }
+//     ],
+//     buttons: [
+//       {
+//         text: 'Cancel',
+//         role: 'cancel',
+//         handler: data => {
+//           console.log('Cancel Clicked');
+//         }
+//       },
+//       {
+//         text: 'Save',
+//         role: 'put',
+//         handler: data => {
+//           console.log('Save Clicked');
+//           this.backand.object.create('pets', {
+//             'name': data.name, 'registrationNumber': data.registrationNumber, 'type': data.type, 'user': 1
+//           })
+//           .then(data => {
+//             console.log(data, '<===== data from backend PROMISE')
+//           })
+//           .catch(error => { })
+//           // this.http.get('https://api.backand.com/1/objects/items/1').map(res => res.json().data);
+//           console.log(data, '<===== data from backend save handler')
+//         }
+//       }
+//     ]
+//   });
+//   alert.present();
+//   }
+//
 }

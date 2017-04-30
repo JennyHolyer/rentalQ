@@ -7,9 +7,9 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
-import { EmergencyPage } from './emergency';
+import { EmergencyEditPage } from './emergency-edit';
 import { EmergencyAddPage } from './emergency-add';
-
+import { PersonalInformationEditPage } from './personal-information-edit';
 /*/
   Generated class for the MyAccount page.
 
@@ -26,6 +26,7 @@ export class MyAccountPage {
   emergency = [];
   user = {};
   emergencyObject = {};
+  personalInformationObject = {};
   loggedUser:string = '';
   age:number = null;
 
@@ -77,8 +78,8 @@ export class MyAccountPage {
   }
 
   // Personal Information Edit or Delete
-  editPersonal() {
-  console.log("Emergency Button Clicked")
+  editPersonalInformation(id) {
+  console.log(id, "Personal Information Button Clicked")
   let actionSheet = this.actionSheetCtrl.create({
     title: '',
     buttons: [
@@ -87,11 +88,22 @@ export class MyAccountPage {
         role: 'destructive',
         handler: () => {
           console.log('Delete');
+          this.backand.object.remove("users", id, {
+            "deep" : false })
+            .then(res => {
+              alert('Successfully Deleted!');
+              // console.log(res, "<==== OBJECT REMOVED *******************");
+          })
+          .catch(err => {
+            console.log(err);
+          }); // End of emergency object delete
         }
       },{
         text: 'Edit',
         handler: () => {
           console.log('Edit Clicked');
+          this.personalInformationModal(id)
+        //   console.log(id, "<======= THIS IS ID")
         }
       },{
         text: 'Cancel',
@@ -103,6 +115,21 @@ export class MyAccountPage {
     ]
   });
   actionSheet.present();
+  }
+
+  personalInformationModal(id) {
+    this.backand.object.getOne("users", id, {
+      "deep" : false })
+      .then(res => {
+        this.personalInformationObject = res.data
+        console.log(res.data, "res data")
+        let modal = this.modalCtrl.create(PersonalInformationEditPage, this.personalInformationObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+        modal.present();
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+
   }
 
   // Emergency Edit or Delete
@@ -146,6 +173,26 @@ export class MyAccountPage {
 }
 
 
+emergencyModal(id) {
+  this.backand.object.getOne("emergency", id, {
+    "deep" : false })
+    .then(res => {
+      this.emergencyObject = res.data
+      let modal = this.modalCtrl.create(EmergencyEditPage, this.emergencyObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+      modal.present();
+  })
+  .catch(err => {
+    console.log(err);
+  }); // End of user object fetch
+
+} // End of emergencyModal()
+
+  addEmergencyContact() {
+    let modal = this.modalCtrl.create(EmergencyAddPage);
+    modal.present();
+  }
+
+
 // Personal Information Edit or Delete
 editCredentials() {
 console.log("Credentials Button Clicked")
@@ -176,23 +223,5 @@ let actionSheet = this.actionSheetCtrl.create({
 actionSheet.present();
 }
 
-emergencyModal(id) {
-  this.backand.object.getOne("emergency", id, {
-    "deep" : false })
-    .then(res => {
-      this.emergencyObject = res.data
-      let modal = this.modalCtrl.create(EmergencyPage, this.emergencyObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
-      modal.present();
-  })
-  .catch(err => {
-    console.log(err);
-  }); // End of user object fetch
-
-} // End of emergencyModal()
-
-  addEmergencyContact() {
-    let modal = this.modalCtrl.create(EmergencyAddPage);
-    modal.present();
-  }
 
 }

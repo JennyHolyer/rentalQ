@@ -11,7 +11,7 @@
     <ion-icon name="ion-coffee"></ion-icon> Employment
     <ion-icon name="md-create" class="item-add"></ion-icon>
   </ion-card-header>
-  <ion-card-content *ngFor="let employed of incomeemployment">
+  <ion-card-content *ngFor="let employed of incomeemployment"><hr>
     <div class="row">
       <div class="col">
         <h3>Employer</h3>
@@ -59,7 +59,8 @@
       </div>
     </div>
 
-  </ion-card-content>
+    <hr>
+ </ion-card-content>
 </ion-card>
 
   <!-- Self-Employed -->
@@ -68,7 +69,7 @@
       <ion-icon name="ion-coffee"></ion-icon> Self-Employed
       <ion-icon name="md-create" class="item-add"></ion-icon>
     </ion-card-header>
-    <ion-card-content *ngFor="let selfEmployed of incomeselfemployed">
+    <ion-card-content *ngFor="let selfEmployed of incomeselfemployed"><hr>
       <div class="row">
         <div class="col">
           <h3>Employer</h3>
@@ -101,7 +102,7 @@
           <p>{{ selfEmployed.startDate | date:'dd/MM/yyyy' }}</p>
         </div>
       </div>
-    </ion-card-content>
+    </ion-card-content><hr>
   </ion-card>
 
 
@@ -112,7 +113,7 @@
         <ion-icon name="md-create" class="item-add" (click)="addPet()"></ion-icon>
       </ion-card-header>
       <ion-card-content>
-        <div class="row" *ngFor="let retired of incomeretired">
+        <div class="row" *ngFor="let retired of incomeretired"><hr>
           <div class="col">
             <h3>Pension Name</h3>
             <p>{{ retired.pensionName }}</p>
@@ -121,11 +122,16 @@
             <h3>Pension No.</h3>
             <p>{{ retired.pensionNumber }}</p>
           </div>
-        </div>
+        </div><hr>
       </ion-card-content>
     </ion-card>
 
     <ion-fab right bottom>
-     <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="md-add"></ion-icon></button>
-   </ion-fab>
+    <button ion-fab color="pink"><ion-icon name="md-add"></ion-icon></button>
+      <ion-fab-list side="top">
+          <button ion-fab (click)="addRetired()"><ion-icon name="cafe"></ion-icon></button>
+        <button ion-fab (click)="addSelfEmployed()"><ion-icon name="laptop"></ion-icon></button>
+        <button ion-fab (click)="addEmployment()"><ion-icon name="briefcase"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
   </ion-content>
