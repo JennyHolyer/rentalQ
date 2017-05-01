@@ -17,14 +17,6 @@ export class EmergencyEditPage {
     objectVariableToPassID; // <=== Got from the other page that has the Modal
      emergency = {};
      user = {};
-     fullName:string = '';
-     relationship:string = '';
-     streetAddress:string = '';
-     unitNumber:string = '';
-     city:string = '';
-     state:string = '';
-     postCode:string = '';
-     phoneNumber:string = '';
      loggedUser:string = '';
 
      timbo = {
@@ -117,7 +109,7 @@ export class EmergencyEditPage {
        this.backand.object.update("emergency", id, data, options)
        .then(data => {
         alert('Emergency Successfully Updated');
-         this.fullName = this.relationship = this.streetAddress = this.unitNumber = this.city = this.state = this.postCode = this.phoneNumber = '';
+         this.timbo.fullName = this.timbo.relationship = this.timbo.streetAddress = this.timbo.unitNumber = this.timbo.city = this.timbo.state = this.timbo.postCode = this.timbo.phoneNumber = '';
          this.dismiss();
        })
        .catch(error => {

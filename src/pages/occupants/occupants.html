@@ -11,7 +11,6 @@
   <ion-card>
     <ion-card-header>
       <ion-icon name="contacts"></ion-icon> Co-Applicant
-      <ion-icon name="md-create" class="item-add"></ion-icon>
     </ion-card-header>
     <ion-card-content>
       <div class="row" *ngFor="let coapplicant of coapplicants">
@@ -28,6 +27,9 @@
           <br>
           <h3>Age</h3>
           <p>{{ coapplicant.age }}</p>
+        </div>
+        <div class="col-sm-9">
+          <ion-icon name="md-create" class="item-add-card" (click)="editCoApplicant(coapplicant.id)"></ion-icon>
         </div>
       </div>
     </ion-card-content>
@@ -50,7 +52,7 @@
           <p>{{ dependent.age }}</p>
         </div>
         <div class="col-sm-9">
-          <ion-icon name="md-create" class="item-add-card"></ion-icon>
+          <ion-icon name="md-create" class="item-add-card" (click)="editDependent(dependent.id)"></ion-icon>
         </div>
       </div>
     </ion-card-content>
@@ -72,7 +74,7 @@
             <p>{{pet.registrationNumber}}</p>
           </div>
           <div class="col-sm-9">
-            <ion-icon name="md-create" class="item-add-card" (click)="addPet()"></ion-icon>
+            <ion-icon name="md-create" class="item-add-card" (click)="editPet(pet.id)"></ion-icon>
           </div>
         </div>
       </ion-card-content>
