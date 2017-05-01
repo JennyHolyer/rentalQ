@@ -29,7 +29,9 @@ import { OccupantsPage } from '../pages/occupants/occupants';
 import { CoApplicantsAddPage } from '../pages/occupants/coapplicants-add';
 import { DependentsAddPage } from '../pages/occupants/dependents-add';
 import { PetsAddPage } from '../pages/occupants/pets-add';
-
+import { CoApplicantsEditPage } from '../pages/occupants/coapplicants-edit';
+// import { DependentsEditPage } from '../pages/occupants/dependents-edit';
+// import { PetsEditPage } from '../pages/occupants/pets-edit';
 
 
 import { RentalCheckPage } from '../pages/rental-check/rental-check';
@@ -73,6 +75,7 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
     CoApplicantsAddPage,
     DependentsAddPage,
     PetsAddPage,
+    CoApplicantsEditPage,
     RentalCheckPage,
     RentalHistoryPage,
     RentalHistoryAddPage,
@@ -111,6 +114,7 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
     CoApplicantsAddPage,
     DependentsAddPage,
     PetsAddPage,
+    CoApplicantsEditPage,
     RentalCheckPage,
     RentalHistoryPage,
     RentalHistoryAddPage,

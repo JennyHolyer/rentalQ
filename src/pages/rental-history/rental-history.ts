@@ -114,6 +114,7 @@ addressModal(id) {
     "deep" : false })
     .then(res => {
       this.address = res.data
+      console.log(this.address, "line 117")
       let modal = this.modalCtrl.create(RentalHistoryEditPage, this.address); // <== HAVE TO PASS OBJECT & NOT AN ID!
       modal.present();
   })

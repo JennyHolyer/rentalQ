@@ -7,13 +7,8 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-/*
-  Generated class for the Emergency page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 
 @Component({
   selector: 'page-rental-history-edit',
@@ -22,84 +17,127 @@ import { ViewController } from 'ionic-angular';
 export class RentalHistoryEditPage {
 
   user = {};
-  streetAddress:string = '456 W Arlington Lane';
-  unitNumber:string = '848';
-  city:string = 'Rancho';
-  state:string = 'CA';
-  postCode:string = '85548';
-  rentAmount = '8000';
-  isCurrent:boolean = false;
-
-  public date = {
-    moveInDate: '2015-01-31',
-    moveOutDate: '2017-02-20'
-  }
-
-  pmFirstName:string = 'Rudy';
-  pmLastName:string = 'Jensen';
-  email:string = 'tim@stancebranding.com';
-  phoneNumber:string = '8789874878';
-  faxNumber:string = '2547898789';
+  rentalHistoryID = {};
   loggedUser:string = '';
+  address = {}; //see line 62, use in front-end to display data
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+  addressInfo = {
+      streetAddress: '',
+      unitNumber: '',
+      city: '',
+      state: '',
+      postCode: '',
+      rentAmount: '',
+      isCurrent:'',
+      moveInDate:'',
+      moveOutDate:'',
+      pmstreetAddress:'',
+      pmunitNumber:'',
+      email:'',
+      faxNumber:''
+};
 
-    let loader = this.loadingCtrl.create({
-      content: "Loading...",
-      duration: 800
-      });
-      loader.present();
-     // End of loader
 
-     backand.user.getUserDetails(false)
-    .then(res => {
-      this.loggedUser = res.data.userId
 
-      this.backand.object.getOne("users", this.loggedUser, {
-        "deep" : true })
-        .then(res => {
-          this.user = res.data
+ todo : FormGroup;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.rentalHistoryID = this.navParams.get('id'); // <=== GRABBING ID FROM PARAMETER BEING PASSED FROM MODAL IN PREVIOUS PAGE
+
+      let loader = this.loadingCtrl.create({
+        content: "Loading...",
+        duration: 800
+        });
+        loader.present();
+       // End of loader
+
+       backand.user.getUserDetails(false)
+      .then(res => {
+        this.loggedUser = res.data.userId
+
+        this.backand.object.getOne("rentalHistory", this.loggedUser, {
+          "deep" : true })
+          .then(res => {
+            this.address = res.data
+            console.log(res.data, "rentalHistory data")
+            this.addressInfo.streetAddress = res.data.streetAddress
+            this.addressInfo.unitNumber = res.data.unitNumber,
+            this.addressInfo.city = res.data.city,
+            this.addressInfo.state = res.data.state,
+            this.addressInfo.postCode = res.data.postCode,
+            this.addressInfo.rentAmount = res.data.rentAmount,
+            this.addressInfo.isCurrent = res.data.isCurrent,
+            this.addressInfo.moveInDate = res.data.moveInDate,
+            this.addressInfo.moveOutDate = res.data.moveOutDate,
+            this.addressInfo.pmstreetAddress = res.data.pmstreetAddress,
+            this.addressInfo.pmunitNumber = res.data.pmunitNumber,
+            this.addressInfo.email = res.data.email,
+            this.addressInfo.email = res.data.faxNumber
+        })
+        .catch(err => {
+          console.log(err);
+      }); // End of user object fetch
+
+
+
       })
       .catch(err => {
         console.log(err);
       }); // End of user object fetch
-    })
-    .catch(err => {
-      console.log(err);
-    }); // End of user object fetch
+
+    } // END OF CONSTRUCTOR
+
+    ionViewDidLoad() {
+      console.log('ionViewDidLoad addressInformationEditPage');
+    }
+
+
+    // Update Emergency Object!
+    saveForm(id) {
+      console.log("Save Method Entered")
+      let options = {
+        returnObject: true
+      };
+
+      let data = {
+       streetAddress: this.addressInfo.streetAddress,
+       unitNumber: this.addressInfo.unitNumber,
+       city: this.addressInfo.city,
+       state: this.addressInfo.state,
+       postCode: this.addressInfo.postCode,
+       rentAmount: this.addressInfo.rentAmount,
+       isCurrent: this.addressInfo.isCurrent,
+       moveInDate: this.addressInfo.moveInDate,
+       moveOutDate: this.addressInfo.moveOutDate,
+       pmstreetAddress: this.addressInfo.pmstreetAddress,
+       pmunitNumber: this.addressInfo.pmunitNumber,
+       email: this.addressInfo.email,
+       faxNumber: this.addressInfo.faxNumber,
+       user: this.loggedUser
+
+      };
+
+      console.log(data, "<###### OBJECT PARAMETERS");
+
+      this.backand.object.update("rentalHistory", id, data, options)
+      .then(data => {
+       alert('addressInfo Successfully Updated');
+
+       this.addressInfo.streetAddress = this.addressInfo.unitNumber = this.addressInfo.city = this.addressInfo.state = this.addressInfo.postCode = this.addressInfo.isCurrent = this.addressInfo.rentAmount = this.addressInfo.moveInDate = this.addressInfo.moveOutDate = this.addressInfo.pmstreetAddress  = this.addressInfo.email  = this.addressInfo.faxNumber  = '';
+
+       this.dismiss();
+     })
+      .catch(error => {
+       console.log(error, '<===== data from backend save handler')
+   })
+   }
 
 
 
-  } // END OF CONSTRUCTOR
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Rental History Add Page');
-  }
-
-
-
-  save() {
-    console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    console.log("Save Method Entered in Rental History")
-    console.log(this.date.moveInDate, "MOVE IN", this.date.moveOutDate, "<== MOVE OUT")
-    this.backand.object.create('rentalHistory', {
-     'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'moveInDate': this.date.moveInDate, 'moveOutDate': this.date.moveOutDate, 'rentAmount': this.rentAmount, 'isCurrent': this.isCurrent, 'pmFirstName': this.pmFirstName, 'pmLastName': this.pmLastName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'user': this.loggedUser
-    })
-    .then(data => {
-     alert('Rental History Successfully Added');
-     this.streetAddress = this.unitNumber = this.city = this.state = this.postCode = this.date.moveInDate = this.date.moveOutDate = this.rentAmount = this.pmFirstName = this.pmLastName = this.phoneNumber = this.faxNumber = '';
-
-     this.dismiss();
-
-    })
-    .catch(error => {
-     console.log(error, '<===== data from backend save handler')
-    })
- }
-
- dismiss() {
-  this.viewCtrl.dismiss();
-}
+    dismiss() {
+    this.viewCtrl.dismiss();
+    }
 
 
 }
