@@ -13,8 +13,28 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-fab right bottom>
-   <button ion-fab color="pink" (click)="presentActionSheet()"><ion-icon name="ios-send"></ion-icon></button>
- </ion-fab>
+<ion-content>
+  <!-- Current Address -->
+    <ion-card *ngFor="let address of rentalHistory">
+      <ion-card-header>
+        {{ address.streetAddress }} {{ address.unitNumber }}
+      </ion-card-header>
+      <ion-card-content>
+        <div class="row">
+          <div class="col">
+            <h3>Agent's Name</h3>
+            <p>{{ address.pmFirstName }} {{ address.pmLastName }}</p>
+          </div>
+
+          <div class="col">
+            <p>{{ address.phoneNumber }}</p>
+            <p>{{ address.email }}</p>
+          </div>
+        </div>
+
+        <button ion-button block color="secondary" (click)="requestRentalCheck(address.id)">Request Rental Check</button>
+
+      </ion-card-content>
+    </ion-card>
+
 </ion-content>
