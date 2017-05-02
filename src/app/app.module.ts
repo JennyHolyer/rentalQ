@@ -1,4 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+
+
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -50,6 +57,7 @@ import { LandingPage } from '../pages/landing/landing';
 
 import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
 import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data on users phone
+import { Camera } from '@ionic-native/camera';
 
 
 
@@ -89,7 +97,7 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
     LandingPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    BrowserModule, HttpModule, IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() // Storage also imported here
   ],
   bootstrap: [IonicApp],
@@ -130,6 +138,11 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
+    File,
+    FilePath,
+    Transfer,
+    // TransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackandService // Again add BackandService
   ]
