@@ -47,7 +47,7 @@ export class DocumentsPage {
      console.log(err);
    }); // End of user object fetch
 
-   const fileTransfer: TransferObject = this.transfer.create();
+  //  const fileTransfer: TransferObject = this.transfer.create();
 
  } // END OF CONSTRUCTOR
 
@@ -63,13 +63,15 @@ export class DocumentsPage {
         {
           text: 'Load from Library',
           handler: () => {
-            this.camera.getPicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+            console.log("Library Source Selected")
           }
         },
         {
           text: 'Use Camera',
           handler: () => {
-            this.camera.getPicture(this.camera.PictureSourceType.CAMERA);
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+            console.log("Camera Source Selected")
           }
         },
         {
@@ -84,15 +86,19 @@ export class DocumentsPage {
 
 public takePicture(sourceType) {
   // Create options for the Camera Dialog
-  var options = {
+  let options = {
     quality: 100,
     sourceType: sourceType,
     saveToPhotoAlbum: false,
     correctOrientation: true
+    // quality: 25,
+    // destinationType: this.camera.DestinationType.DATA_URL
   };
+
 
   // Get the data of an image <========
   this.camera.getPicture(options).then((imagePath) => {
+    console.log(options, "get picture method entered")
     // Special handling for Android library <========
     if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
       this.filePath.resolveNativePath(imagePath)
@@ -102,8 +108,8 @@ public takePicture(sourceType) {
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       });
     } else {
-      var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-      var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+      let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+      let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
       this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
     }
   }, (err) => {
@@ -114,7 +120,7 @@ public takePicture(sourceType) {
 
 // Create a new name for the image
 private createFileName() {
-  var d = new Date(),
+  let d = new Date(),
   n = d.getTime(),
   newFileName =  n + ".jpg";
   return newFileName;
@@ -148,16 +154,17 @@ public pathForImage(img) {
 }
 
 public uploadImage() {
+  console.log("Upload image method hit")
   // Destination URL
-  var url = "http://yoururl/upload.php";
+  let url = "https://api.backand.com:443/1/objects/documents";
 
   // File for Upload
-  var targetPath = this.pathForImage(this.lastImage);
+  let targetPath = this.pathForImage(this.lastImage);
 
   // File name only
-  var filename = this.lastImage;
+  let filename = this.lastImage;
 
-  var options = {
+  let options = {
     fileKey: "file",
     fileName: filename,
     chunkedMode: false,
@@ -165,21 +172,20 @@ public uploadImage() {
     params : {'fileName': filename}
   };
 
-  // const fileTransfer = new Transfer();
-
   this.loading = this.loadingCtrl.create({
     content: 'Uploading...',
   });
   this.loading.present();
 
   // Use the FileTransfer to upload the image <========
-  // fileTransfer.upload(targetPath, url, options).then(data => {
-  //   this.loading.dismissAll()
-  //   this.presentToast('Image succesful uploaded.');
-  // }, err => {
-  //   this.loading.dismissAll()
-  //   this.presentToast('Error while uploading file.');
-  // });
+  const fileTransfer: TransferObject = this.transfer.create();
+  fileTransfer.upload(targetPath, url, options).then(data => {
+    this.loading.dismissAll()
+    this.presentToast('Image succesful uploaded.');
+  }, err => {
+    this.loading.dismissAll()
+    this.presentToast('Error while uploading file.');
+  });
 }
 
 
