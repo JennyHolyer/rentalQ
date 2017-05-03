@@ -56,7 +56,7 @@ export class RentalHistoryEditPage {
       .then(res => {
         this.loggedUser = res.data.userId
 
-        this.backand.object.getOne("rentalHistory", this.loggedUser, {
+        this.backand.object.getOne("rentalHistory", this.rentalHistoryID, {
           "deep" : true })
           .then(res => {
             this.address = res.data
