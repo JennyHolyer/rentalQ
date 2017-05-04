@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
@@ -67,6 +68,12 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
 import { Camera } from '@ionic-native/camera';
 
 
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'dfc2d4b3'
+  }
+};
+
 
 @NgModule({
   declarations: [
@@ -109,6 +116,7 @@ import { Camera } from '@ionic-native/camera';
     LandingPage
   ],
   imports: [
+    CloudModule.forRoot(cloudSettings),
     BrowserModule, HttpModule, IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() // Storage also imported here
   ],
