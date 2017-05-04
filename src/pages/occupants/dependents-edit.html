@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="pink">
+    <ion-title>
+      Edit Dependent
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button type="submit" (click)="saveForm(dependent.id)">
+        <span ion-text color="white" showWhen="ios">Save</span>
+        <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- Add Dependent -->
+<ion-content>
+    <form (ngSubmit)="saveForm(dependent.id)">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Full Name</ion-label>
+                <ion-input type="text" name="fullName" [value]="dependent.fullName" [(ngModel)]="dependentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Age</ion-label>
+                <ion-input type="text" name="age" [value]="dependent.age" [(ngModel)]="dependentInfo.age"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>
