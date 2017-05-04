@@ -11,6 +11,9 @@ import { EmploymentsAddPage } from './employments-add';
 import { SelfEmployedAddPage } from './self-employed-add';
 import { RetiredAddPage } from './retired-add';
 import { EmploymentsEditPage } from './employments-edit';
+import { SelfEmployedEditPage } from './self-employed-edit';
+import { RetiredEditPage } from './retired-edit';
+
 
 
 
@@ -26,6 +29,9 @@ import { EmploymentsEditPage } from './employments-edit';
 })
 export class IncomePage {
   employmentObject = {};
+  selfEmployedObject = {};
+  retiredObject = {};
+
   user = {};
   loggedUser:string = '';
   public incomeemployment: any[] = [];
@@ -142,6 +148,122 @@ export class IncomePage {
     }); // End of user object fetch
 
   }
+
+
+
+  // Self-employed Edit or Delete
+  editSelfEmployed(id) {
+  console.log(id, "Self-employed Button Clicked")
+  let actionSheet = this.actionSheetCtrl.create({
+    title: '',
+    buttons: [
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: () => {
+          console.log('Delete');
+          this.backand.object.remove("incomeSelfEmployed", id, {
+            "deep" : false })
+            .then(res => {
+              alert('Successfully Deleted!');
+              // console.log(res, "<==== OBJECT REMOVED *******************");
+          })
+          .catch(err => {
+            console.log(err);
+          }); // End of emergency object delete
+        }
+      },{
+        text: 'Edit',
+        handler: () => {
+          console.log('Edit Clicked');
+          this.selfEmployedModal(id)
+        //   console.log(id, "<======= THIS IS ID")
+        }
+      },{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }
+    ]
+  });
+  actionSheet.present();
+  }
+
+  selfEmployedModal(id) {
+    this.backand.object.getOne("incomeSelfEmployed", id, {
+      "deep" : false })
+      .then(res => {
+        this.selfEmployedObject = res.data
+        console.log(res.data, "res data")
+        let modal = this.modalCtrl.create(SelfEmployedEditPage, this.selfEmployedObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+        modal.present();
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+
+  }
+
+
+  // Retired Edit or Delete
+  editRetired(id) {
+  console.log(id, "Retired Button Clicked")
+  let actionSheet = this.actionSheetCtrl.create({
+    title: '',
+    buttons: [
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: () => {
+          console.log('Delete');
+          this.backand.object.remove("incomeRetired", id, {
+            "deep" : false })
+            .then(res => {
+              alert('Successfully Deleted!');
+              // console.log(res, "<==== OBJECT REMOVED *******************");
+          })
+          .catch(err => {
+            console.log(err);
+          }); // End of emergency object delete
+        }
+      },{
+        text: 'Edit',
+        handler: () => {
+          console.log('Edit Clicked');
+          this.retiredModal(id)
+        //   console.log(id, "<======= THIS IS ID")
+        }
+      },{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }
+    ]
+  });
+  actionSheet.present();
+  }
+
+  retiredModal(id) {
+    this.backand.object.getOne("incomeRetired", id, {
+      "deep" : false })
+      .then(res => {
+        this.retiredObject = res.data
+        console.log(res.data, "res data")
+        let modal = this.modalCtrl.create(RetiredEditPage, this.retiredObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+        modal.present();
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+
+  }
+
+
+
 
 
 

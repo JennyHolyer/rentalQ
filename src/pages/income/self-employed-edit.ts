@@ -12,18 +12,22 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
-  selector: 'page-retired-edit',
-  templateUrl: 'retired-edit.html'
+  selector: 'page-self-employed-edit',
+  templateUrl: 'self-employed-edit.html'
 })
-export class RetiredEditPage {
-  retired= {};
+export class SelfEmployedEditPage {
+  selfEmployed= {};
   user = {};
   loggedUser:string = '';
-  retiredID = '';
+  selfEmployedID = '';
 
-  retiredInfo = {
-      pensionName: '',
-      pensionNumber: ''
+  selfEmployedInfo = {
+      businessName: '',
+      position: '',
+      abnNumber: '',
+      acnNumber: '',
+      salary: '',
+      startDate: ''
 
   };
 
@@ -31,7 +35,7 @@ export class RetiredEditPage {
 
       constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
-        this.retiredID = this.navParams.get('id'); // <=== GRABBING ID FROM PARAMETER BEING PASSED FROM MODAL IN PREVIOUS PAGE
+        this.selfEmployedID = this.navParams.get('id'); // <=== GRABBING ID FROM PARAMETER BEING PASSED FROM MODAL IN PREVIOUS PAGE
 
         let loader = this.loadingCtrl.create({
           content: "Loading...",
@@ -44,15 +48,17 @@ export class RetiredEditPage {
         .then(res => {
           this.loggedUser = res.data.userId
 
-          this.backand.object.getOne("incomeRetired", this.retiredID, {
+          this.backand.object.getOne("incomeSelfEmployed", this.selfEmployedID, {
             "deep" : false })
             .then(res => {
-              this.retired = res.data
-              console.log(res, "retired data")
-
-              this.retiredInfo.pensionName = res.data.pensionName
-              this.retiredInfo.pensionNumber = res.data.pensionNumber
-
+              this.selfEmployed = res.data
+              console.log(res, "selfEmployed data")
+              this.selfEmployedInfo.businessName = res.data.businessName
+              this.selfEmployedInfo.position = res.data.position
+              this.selfEmployedInfo.abnNumber = res.data.abnNumber
+              this.selfEmployedInfo.acnNumber = res.data.acnNumber
+              this.selfEmployedInfo.salary = res.data.salary
+              this.selfEmployedInfo.startDate = res.data.startDate
           })
           .catch(err => {
             console.log(err);
@@ -68,7 +74,7 @@ export class RetiredEditPage {
       } // END OF CONSTRUCTOR
 
       ionViewDidLoad() {
-        console.log('ionViewDidLoad retiredEditPage');
+        console.log('ionViewDidLoad SelfEmployedEditPage');
       }
 
 
@@ -81,8 +87,12 @@ export class RetiredEditPage {
 
         let data = {
 
-         pensionName: this.retiredInfo.pensionName,
-         pensionNumber: this.retiredInfo.pensionNumber,
+         businessName: this.selfEmployedInfo.businessName,
+         position: this.selfEmployedInfo.position,
+         abnNumber: this.selfEmployedInfo.abnNumber,
+         acnNumber: this.selfEmployedInfo.acnNumber,
+         salary: this.selfEmployedInfo.salary,
+         startDate: this.selfEmployedInfo.startDate,
          user: this.loggedUser
 
 
@@ -91,11 +101,11 @@ export class RetiredEditPage {
 
         console.log(data, "<###### OBJECT PARAMETERS");
 
-        this.backand.object.update("incomeRetired", id, data, options)
+        this.backand.object.update("incomeSelfEmployed", id, data, options)
         .then(data => {
-         alert('retiredInfo Successfully Updated');
+         alert('selfEmployedInfo Successfully Updated');
 
-         this.retiredInfo.pensionName  = this.retiredInfo.pensionNumber =  '';
+         this.selfEmployedInfo.abnNumber = this.selfEmployedInfo.position = this.selfEmployedInfo.acnNumber = this.selfEmployedInfo.salary = this.selfEmployedInfo.businessName  = this.selfEmployedInfo.startDate =  '';
 
          this.dismiss();
        })
