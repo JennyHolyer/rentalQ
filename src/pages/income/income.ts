@@ -6,9 +6,12 @@ import { BackandService } from '@backand/angular2-sdk'; // Add BackandService
 import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
+import { ActionSheetController } from 'ionic-angular';
 import { EmploymentsAddPage } from './employments-add';
 import { SelfEmployedAddPage } from './self-employed-add';
 import { RetiredAddPage } from './retired-add';
+import { EmploymentsEditPage } from './employments-edit';
+
 
 
 /*
@@ -22,13 +25,14 @@ import { RetiredAddPage } from './retired-add';
   templateUrl: 'income.html'
 })
 export class IncomePage {
+  employmentObject = {};
   user = {};
   loggedUser:string = '';
   public incomeemployment: any[] = [];
   public incomeselfemployed: any[] = [];
   public incomeretired: any[] = [];
 
-  constructor(public modalCtrl: ModalController, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public modalCtrl: ModalController, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController,  public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -81,6 +85,62 @@ export class IncomePage {
   addRetired() {
       let modal = this.modalCtrl.create(RetiredAddPage);
       modal.present();
+  }
+
+
+  // employments Edit or Delete
+  editEmployment(id) {
+  console.log(id, "employment Button Clicked")
+  let actionSheet = this.actionSheetCtrl.create({
+    title: '',
+    buttons: [
+      {
+        text: 'Delete',
+        role: 'destructive',
+        handler: () => {
+          console.log('Delete');
+          this.backand.object.remove("incomeEmployment", id, {
+            "deep" : false })
+            .then(res => {
+              alert('Successfully Deleted!');
+              // console.log(res, "<==== OBJECT REMOVED *******************");
+          })
+          .catch(err => {
+            console.log(err);
+          }); // End of emergency object delete
+        }
+      },{
+        text: 'Edit',
+        handler: () => {
+          console.log('Edit Clicked');
+          this.employmentsModal(id)
+        //   console.log(id, "<======= THIS IS ID")
+        }
+      },{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }
+    ]
+  });
+  actionSheet.present();
+  }
+
+  employmentsModal(id) {
+    this.backand.object.getOne("incomeEmployment", id, {
+      "deep" : false })
+      .then(res => {
+        this.employmentObject = res.data
+        console.log(res.data, "res data")
+        let modal = this.modalCtrl.create(EmploymentsEditPage, this.employmentObject); // <== HAVE TO PASS OBJECT & NOT AN ID!
+        modal.present();
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+
   }
 
 

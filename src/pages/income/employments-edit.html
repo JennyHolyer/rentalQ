@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="pink">
+    <ion-title>
+      Edit Employment
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button type="submit" (click)="saveForm(employment.id)">
+        <span ion-text color="white" showWhen="ios">Save</span>
+        <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- Edit Employment -->
+<ion-content>
+    <form (ngSubmit)="saveForm(employment.id)">
+        <ion-list>
+            <ion-item>
+              <ion-label floating>Employer</ion-label>
+              <ion-input type="text" name="companyName" [value]="employment.companyName" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Position</ion-label>
+                <ion-input type="text" name="position" [value]="employment.position" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Employment Type</ion-label>
+              <ion-input type="text" name="employmentType" [value]="employment.employmentType" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Salary</ion-label>
+                <ion-input type="text" name="salary" [value]="employment.salary" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Supervisor</ion-label>
+              <ion-input type="text" name="managerFullName" [value]="employment.managerFullName" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Phone</ion-label>
+                <ion-input type="text" name="phoneNumber" [value]="employment.phoneNumber" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Start Date</ion-label>
+              <ion-input type="text" name="startDate" [value]="employment.startDate" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>End Date</ion-label>
+              <ion-input type="text" name="name" [value]="employment.endDate" [(ngModel)]="employmentInfo.fullName"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

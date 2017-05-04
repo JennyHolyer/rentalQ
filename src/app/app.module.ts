@@ -25,6 +25,8 @@ import { IncomePage } from '../pages/income/income';
 import { EmploymentsAddPage } from '../pages/income/employments-add';
 import { SelfEmployedAddPage } from '../pages/income/self-employed-add';
 import { RetiredAddPage } from '../pages/income/retired-add';
+import { EmploymentsEditPage } from '../pages/income/employments-edit';
+
 
 import { MyAccountPage } from '../pages/my-account/my-account';
 import { EmergencyEditPage } from '../pages/my-account/emergency-edit';
@@ -38,8 +40,8 @@ import { CoApplicantsAddPage } from '../pages/occupants/coapplicants-add';
 import { DependentsAddPage } from '../pages/occupants/dependents-add';
 import { PetsAddPage } from '../pages/occupants/pets-add';
 import { CoApplicantsEditPage } from '../pages/occupants/coapplicants-edit';
-// import { DependentsEditPage } from '../pages/occupants/dependents-edit';
-// import { PetsEditPage } from '../pages/occupants/pets-edit';
+import { DependentsEditPage } from '../pages/occupants/dependents-edit';
+import { PetsEditPage } from '../pages/occupants/pets-edit';
 
 
 import { RentalCheckPage } from '../pages/rental-check/rental-check';
@@ -82,6 +84,7 @@ const cloudSettings: CloudSettings = {
     EmploymentsAddPage,
     SelfEmployedAddPage,
     RetiredAddPage,
+    EmploymentsEditPage,
     MyAccountPage,
     EmergencyEditPage,
     EmergencyAddPage,
@@ -91,6 +94,8 @@ const cloudSettings: CloudSettings = {
     DependentsAddPage,
     PetsAddPage,
     CoApplicantsEditPage,
+    DependentsEditPage,
+    PetsEditPage,
     RentalCheckPage,
     RentalHistoryPage,
     RentalHistoryAddPage,
@@ -122,6 +127,7 @@ const cloudSettings: CloudSettings = {
     EmploymentsAddPage,
     SelfEmployedAddPage,
     RetiredAddPage,
+    EmploymentsEditPage,
     MyAccountPage,
     PersonalInformationEditPage,
     EmergencyEditPage,
@@ -131,6 +137,8 @@ const cloudSettings: CloudSettings = {
     DependentsAddPage,
     PetsAddPage,
     CoApplicantsEditPage,
+    DependentsEditPage,
+    PetsEditPage,
     RentalCheckPage,
     RentalHistoryPage,
     RentalHistoryAddPage,
