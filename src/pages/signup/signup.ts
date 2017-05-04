@@ -28,6 +28,13 @@ export class SignupPage {
   password: string = '';
   confirmPassword: string = '';
   loggedInUser: string = '';
+  signup = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmPassword: ''
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public http: Http) {
 
@@ -59,7 +66,7 @@ export class SignupPage {
     alert('Passwords should match');
     return;
   }
-  this.backand.signup(this.firstName, this.lastName, this.email, this.password, this.confirmPassword)
+  this.backand.signup(this.signup.firstName, this.signup.lastName, this.signup.email, this.signup.password, this.signup.confirmPassword)
   .then(res => {
     console.log(res, "RES");
     console.log(res.data, "RES.DATA");
