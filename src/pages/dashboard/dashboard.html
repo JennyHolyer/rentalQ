@@ -2,12 +2,25 @@
   <ion-navbar color="pink">
     <ion-title>Dashboard</ion-title>
   </ion-navbar>
+
+  <ion-segment [(ngModel)]="dashboard">
+      <ion-segment-button value="applications">
+        {{applicationsCount}} Submitted
+      </ion-segment-button>
+      <ion-segment-button value="approved">
+        {{approvedCount}} Approved
+      </ion-segment-button>
+      <ion-segment-button value="accepted">
+        Accepted
+      </ion-segment-button>
+    </ion-segment>
+
+
 </ion-header>
 
-<!-- <ion-content class="card-background-page"> -->
 <ion-content>
 
-  <div class="center-stuff"><h4>Welcome, {{user.firstName}}!</h4></div>
+  <!-- <div class="center-stuff"><h4>Welcome, {{user.firstName}}!</h4></div>
 
 <ion-grid>
   <ion-row>
@@ -24,130 +37,48 @@
       </button>
     </div>
   </ion-row>
-</ion-grid>
-
-<div class="bottom-margin"></div>
-
-<!-- <ion-grid>
-<ion-row>
-  <ion-col col-6 [navPush]="applicationsPage">
-    <div class="circle">
-     <div class="circle-inner">
-       <div class="score-text">
-          6
-        </div>
-     </div>
-    </div>
-    <p class="sub-header">Applications <br> Submitted</p>
-  </ion-col>
-  <ion-col col-6 [navPush]="offersPage">
-
-    <div class="circle circle-applications">
-     <div class="circle-inner">
-       <div class="score-text">
-          3
-        </div>
-     </div>
-    </div>
-
-    <p class="sub-header">Applications <br> Approved</p>
-
-  </ion-col>
-</ion-row>
 </ion-grid> -->
 
-<!-- <ion-card>
-  <div class="row">
-    <div class="col">
-      <span (click)="login()">LOGIN</span>
-    </div>
-    <div class="col">
-      <p><span (click)="tourApp()">SPLASH</span></p>
-    </div>
-    <div class="col">
-      <span (click)="signUp()">SIGN UP</span>
-    </div>
-  </div>
-</ion-card> -->
-
 <div class="bottom-margin"></div>
 
+  <div [ngSwitch]="dashboard">
+    <ion-list *ngSwitchCase="'applications'">
+      <ion-item-sliding *ngFor="let application of applications">
+        <ion-item>
+          <p> <ion-icon name="checkmark-circle" color="secondary"></ion-icon> {{application.status}} on {{application.createdAt | date:'dd/MM/yyyy'}}</p>
+          <h3>{{application.streetAddress}} {{application.unitNumber}} {{application.city}}, {{application.state}}</h3>
+          <p><ion-icon name="person"></ion-icon> {{application.fullName}} <ion-icon name="mail"></ion-icon> {{application.email}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger">
+            <ion-icon name="Delete"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
-<ion-list>
+    <ion-list *ngSwitchCase="'approved'">
+      <ion-item-sliding *ngFor="let offer of approved">
+        <ion-item>
+          <p> <ion-icon name="checkmark-circle" color="secondary"></ion-icon> {{offer.status}} on {{offer.createdAt | date:'dd/MM/yyyy'}}</p>
+          <h3>{{offer.streetAddress}} {{offer.unitNumber}} {{offer.city}}, {{offer.state}}</h3>
+          <p><ion-icon name="person"></ion-icon> {{offer.fullName}} <ion-icon name="mail"></ion-icon> {{offer.email}}</p>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger">
+            <ion-icon name="Delete"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
-  <!-- <ion-card> -->
-    <ion-item [navPush]="rentalCheckPage">
-      <ion-avatar item-left>
-        <ion-icon name="ios-checkmark-circle" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png"> -->
-      </ion-avatar>
-      <h2>Rental Check</h2>
-      <p>Kickstart your application</p>
-      <ion-icon name="checkmark" item-right color="incomplete"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
+      <ion-list *ngSwitchCase="'accepted'">
+        <p>You have not accepted any offers at the moment.</p>
+      </ion-list>
+    </div>
 
-  <!-- <ion-card> -->
-    <ion-item [navPush]="occupantsPage">
-      <ion-avatar item-left>
-         <ion-icon name="people" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-squeeze.png"> -->
-      </ion-avatar>
-      <h2>Household Information</h2>
-      <p>Add co-applicants, dependents & pets</p>
-      <ion-icon name="checkmark" item-right color="secondary"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
-
-  <!-- <ion-card> -->
-    <ion-item [navPush]="incomePage">
-      <ion-avatar item-left>
-        <ion-icon name="logo-usd" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-bopeep.png"> -->
-      </ion-avatar>
-      <h2>Income Information</h2>
-      <p>Improve your odds of approval</p>
-      <ion-icon name="checkmark" item-right color="secondary"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
-
-  <!-- <ion-card> -->
-    <ion-item [navPush]="rentalHistoryPage">
-      <ion-avatar item-left>
-        <ion-icon name="ios-refresh-circle" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png"> -->
-      </ion-avatar>
-      <h2>Rental History</h2>
-      <p>Show where you have lived before</p>
-      <ion-icon name="checkmark" item-right color="secondary"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
-
-  <!-- <ion-card> -->
-    <ion-item [navPush]="documentsPage">
-      <ion-avatar item-left>
-        <ion-icon name="ios-paper" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png"> -->
-      </ion-avatar>
-      <h2>Supporting Documents</h2>
-      <p>Verify your identity</p>
-      <ion-icon name="checkmark" item-right color="secondary"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
-
-  <!-- <ion-card> -->
-    <ion-item [navPush]="MyAccountPage">
-      <ion-avatar item-left>
-        <ion-icon name="ios-person" class="dash"></ion-icon>
-        <!-- <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png"> -->
-      </ion-avatar>
-      <h2>Personal Information</h2>
-      <p>Emergency contact & rental bio</p>
-      <ion-icon name="checkmark" item-right color="incomplete"></ion-icon>
-    </ion-item>
-  <!-- </ion-card> -->
-
-</ion-list>
 <ion-fab right bottom>
  <button ion-fab color="pink" (click)="newApplicationModal()"><ion-icon name="ios-send"></ion-icon></button>
 </ion-fab>

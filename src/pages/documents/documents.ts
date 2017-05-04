@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { IonicNativePlugin } from '@ionic-native/core';
+import { Storage } from '@ionic/storage';
 
 declare var cordova: any;
 
@@ -26,9 +27,13 @@ export class DocumentsPage {
   loading: Loading;
   lastImage: string = null;
   user = {};
+  primaryID: string = '';
   loggedUser:string = '';
+  public base64Image: string;
+  savePicID:string = '';
+  path:string = '';
 
-  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public platform: Platform, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private camera : Camera, private file: File, private filePath: FilePath, private transfer: Transfer) {
+  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public platform: Platform, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, private camera : Camera, private file: File, private filePath: FilePath, private transfer: Transfer, storage: Storage) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -48,6 +53,19 @@ export class DocumentsPage {
    }); // End of user object fetch
 
   //  const fileTransfer: TransferObject = this.transfer.create();
+
+
+  storage.ready().then(() => {
+
+    // set a key/value
+    storage.set('name', 'Max');
+
+    // Or to get a key/value pair
+    storage.get('age').then((val) => {
+      console.log('Your age is', val);
+    })
+  });
+
 
  } // END OF CONSTRUCTOR
 
@@ -88,30 +106,75 @@ public takePicture(sourceType) {
   // Create options for the Camera Dialog
   let options = {
     quality: 100,
+    destinationType: this.camera.DestinationType.NATIVE_URI,
     sourceType: sourceType,
-    saveToPhotoAlbum: false,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    saveToPhotoAlbum: true,
     correctOrientation: true
-    // quality: 25,
-    // destinationType: this.camera.DestinationType.DATA_URL
   };
 
 
   // Get the data of an image <========
   this.camera.getPicture(options).then((imagePath) => {
-    console.log(options, "get picture method entered")
+    // console.log(options, "get picture method entered")
     // Special handling for Android library <========
-    if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-      this.filePath.resolveNativePath(imagePath)
-      .then(filePath => {
-          let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-          let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      });
-    } else {
-      let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-      let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-      this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+
+
+    this.base64Image = "data:image/jpeg;base64," + imagePath;
+    // this.base64Image = imagePath;
+    this.path = imagePath + ".jpg";
+
+    let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+    let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+    this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+
+
+    let options = {
+      returnObject: true
     }
+
+    let data = {
+      'user': 10, 'primaryID': this.path
+    }
+    this.backand.object.create('documents', data, options)
+    .then(res => {
+      console.log(res.data, "created object")
+     alert('Document Pic Submitted');
+    //  this.dismiss();
+    this.savePicID = res.data.id
+
+    this.backand.object.getOne("documents", this.savePicID, {
+      "deep" : true })
+      .then(res => {
+        // this.primaryID = "data:image/jpeg;base64," + res.data.primaryID;
+        // this.primaryID = res.data.primaryID;
+    })
+    .catch(err => {
+      console.log(err);
+    }); // End of user object fetch
+
+
+    })
+    .catch(error => {
+     console.log(error, '<===== data from backend save handler')
+    })
+
+
+
+
+    // if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+    //   this.filePath.resolveNativePath(imagePath)
+    //   .then(filePath => {
+    //       let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+    //       let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+    //     this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    //   });
+    // } else {
+    //   let currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+    //   let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+    //   this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+    // }
   }, (err) => {
     this.presentToast('Error while selecting image.');
   });
@@ -122,15 +185,27 @@ public takePicture(sourceType) {
 private createFileName() {
   let d = new Date(),
   n = d.getTime(),
-  newFileName =  n + ".jpg";
+  newFileName =  "rentalq" + n + ".jpg";
+  console.log(newFileName, "<===NEW FILE NAME")
   return newFileName;
 }
 
+
+// createFile(path, file, replace)
+
+
+
+
+
+
 // Copy the image to a local folder
 private copyFileToLocalDir(namePath, currentName, newFileName) {
+  console.log("copy to local dataDirectory hit")
   this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
     this.lastImage = newFileName;
+    console.log(this.lastImage, "<===")
   }, error => {
+    console.log('Error while storing file.');
     this.presentToast('Error while storing file.');
   });
 }

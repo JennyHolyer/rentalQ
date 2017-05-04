@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Deploy} from '@ionic/cloud-angular';
 import { LoadingController } from 'ionic-angular';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApplicationsPage } from '../applications/applications';
@@ -27,6 +28,7 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class DashboardPage {
   applications = [];
+  applicationsCount:string = '';
   approved = [];
   approvedCount:number = 0;
   status:string = '';
@@ -46,8 +48,17 @@ export class DashboardPage {
   landingPage = LandingPage;
   loggedUser: string = '';
   user = {};
+  dashboard = '';
 
-constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private backand: BackandService) {
+  // {
+  //   applications: '',
+  //   approved: '',
+  //   offers: ''
+  // }
+
+constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private backand: BackandService, public deploy: Deploy) {
+
+  this.dashboard = "applications";
 
   let loader = this.loadingCtrl.create({
     content: "Loading...",
@@ -59,19 +70,20 @@ constructor(public loadingCtrl: LoadingController, public navCtrl: NavController
    backand.user.getUserDetails(false)
   .then(res => {
     this.loggedUser = res.data.userId
-    console.log(res.data, "<==== 3. DASHBOARD GET USER DETAILS");
+    // console.log(res.data, "<==== 3. DASHBOARD GET USER DETAILS");
     this.backand.object.getOne("users", this.loggedUser, {
       "deep" : true })
       .then(res => {
         this.user = res.data
-        this.applications = res.data.applicationinformation.length
+        this.applications = res.data.applicationinformation
+        this.applicationsCount = res.data.applicationinformation.length
         this.approved = res.data.applicationinformation
-        console.log(res.data, "<==== 5. APPLICATION GET USER DETAILS");
-        console.log(this.applications, "<======== Logged Users Applications")
+        // console.log(res.data, "<==== 5. APPLICATION GET USER DETAILS");
+        // console.log(this.applications, "<======== Logged Users Applications")
 
         // this.approved = []
-        console.log(this.approved, "<=== APPROVED: Outside for loop");
-        console.log(this.approved[0].status, "<=== STATUS: Outside for loop");
+        // console.log(this.approved, "<=== APPROVED: Outside for loop");
+        // console.log(this.approved[0].status, "<=== STATUS: Outside for loop");
 
 
         /////////////////////////////////////////////////////
@@ -79,14 +91,14 @@ constructor(public loadingCtrl: LoadingController, public navCtrl: NavController
         ///////////////////////////////////////////////////
         let approvedArr = []
         for(let i = 0; i < this.approved.length; i++) {
-          console.log(this.approved[i].status, "$$$$$$$$$$$$$$$");
           if (this.approved[i].status == "Approved") {
             approvedArr.push(this.approved[i])
           }
         }
-        console.log(approvedArr, "<<<<<< APPROVED ARRAY");
+        console.log(approvedArr.length, "LENGTH")
+        console.log(this.approved, "approvedArr")
         this.approvedCount = approvedArr.length
-        console.log(this.approvedCount, '<<<< Approved Count');
+        this.approved = approvedArr
         return approvedArr;
     })
     .catch(err => {

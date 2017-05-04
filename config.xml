@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.rentalq735205" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>rentalQ</name>
-    <description>An awesome Ionic/Cordova app.</description>
+    <name>Rental Q</name>
+    <description>Easier way to apply for rental properties</description>
     <author email="tim@stancebranding.com" href="http://stancebranding.com/">STANCE</author>
     <content src="index.html" />
     <access origin="*" />
@@ -46,4 +46,5 @@
     <plugin name="cordova-plugin-file" spec="~4.3.2" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.2" />
     <plugin name="cordova-plugin-filepath" spec="~1.0.2" />
+    <plugin name="ionic-plugin-deploy" spec="~0.6.6" />
 </widget>
