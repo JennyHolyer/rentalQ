@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { DashboardPage } from '../dashboard/dashboard';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
+import { StatusBar } from '@ionic-native/status-bar';
 
 
 /*
@@ -36,9 +37,14 @@ export class SignupPage {
     confirmPassword: ''
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public http: Http, private statusBar: StatusBar) {
+
+    this.statusBar.overlaysWebView(true);
+    this.statusBar.backgroundColorByHexString('#ffffff');
 
   }
+
+
 
   // public signUp() {
   //   console.log("Entered Sign Up Method")
