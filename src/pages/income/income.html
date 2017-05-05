@@ -11,10 +11,9 @@
     <ion-icon name="ion-coffee"></ion-icon> Employment
     <ion-icon name="md-create"></ion-icon>
   </ion-card-header>
-  <ion-card-content *ngFor="let employed of incomeemployment"><hr>
-      <div class="col-sm-9">
+  <ion-card-content *ngFor="let employed of incomeemployment">
         <ion-icon name="md-create" class="item-add-card" (click)="editEmployment(employed.id)"></ion-icon>
-      </div>
+
     <div class="row">
       <div class="col">
         <h3>Employer</h3>
@@ -74,6 +73,9 @@
       <ion-icon name="md-create" class="item-add"></ion-icon>
     </ion-card-header>
     <ion-card-content *ngFor="let selfEmployed of incomeselfemployed"><hr>
+        <div class="col-sm-9">
+          <ion-icon name="md-create" class="item-add-card" (click)="editSelfEmployed(selfEmployed.id)"></ion-icon>
+        </div>
       <div class="row">
         <div class="col">
           <h3>Employer</h3>
@@ -114,10 +116,11 @@
     <ion-card>
       <ion-card-header>
         <ion-icon name="ion-coffee"></ion-icon> Retired Income
-        <ion-icon name="md-create" class="item-add" (click)="addPet()"></ion-icon>
       </ion-card-header>
       <ion-card-content>
         <div class="row" *ngFor="let retired of incomeretired"><hr>
+              <ion-icon name="md-create" class="item-add-card" (click)="editRetired(retired.id)"></ion-icon>
+
           <div class="col">
             <h3>Pension Name</h3>
             <p>{{ retired.pensionName }}</p>

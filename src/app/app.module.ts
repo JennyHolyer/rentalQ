@@ -25,6 +25,11 @@ import { EmploymentsAddPage } from '../pages/income/employments-add';
 import { SelfEmployedAddPage } from '../pages/income/self-employed-add';
 import { RetiredAddPage } from '../pages/income/retired-add';
 import { EmploymentsEditPage } from '../pages/income/employments-edit';
+import { SelfEmployedEditPage } from '../pages/income/self-employed-edit';
+import { RetiredEditPage } from '../pages/income/retired-edit';
+
+
+
 
 
 import { MyAccountPage } from '../pages/my-account/my-account';
@@ -84,6 +89,8 @@ const cloudSettings: CloudSettings = {
     SelfEmployedAddPage,
     RetiredAddPage,
     EmploymentsEditPage,
+    SelfEmployedEditPage,
+    RetiredEditPage,
     MyAccountPage,
     EmergencyEditPage,
     EmergencyAddPage,
@@ -127,6 +134,8 @@ const cloudSettings: CloudSettings = {
     SelfEmployedAddPage,
     RetiredAddPage,
     EmploymentsEditPage,
+    SelfEmployedEditPage,
+    RetiredEditPage,
     MyAccountPage,
     PersonalInformationEditPage,
     EmergencyEditPage,

@@ -35,6 +35,7 @@ export class PersonalInformationEditPage {
       gender: '',
       maritalStatus: '',
       smokingHabits: '',
+      bio: '',
       dateOfBirth:''
 
   };
@@ -67,7 +68,9 @@ export class PersonalInformationEditPage {
               this.personalInfo.gender = res.data.gender,
               this.personalInfo.smokingHabits = res.data.smokingHabits,
               this.personalInfo.maritalStatus = res.data.maritalStatus,
-              this.personalInfo.dateOfBirth = res.data.dateOfBirth
+              this.personalInfo.dateOfBirth = res.data.dateOfBirth,
+              this.personalInfo.bio = res.data.bio
+
 
           })
           .catch(err => {
@@ -103,6 +106,7 @@ export class PersonalInformationEditPage {
          smokingHabits: this.personalInfo.smokingHabits,
          maritalStatus: this.personalInfo.maritalStatus,
          dateOfBirth: this.personalInfo.dateOfBirth,
+         bio: this.personalInfo.bio,
          user: this.loggedUser
 
         };
@@ -113,7 +117,7 @@ export class PersonalInformationEditPage {
         .then(data => {
          alert('personalInfo Successfully Updated');
 
-         this.personalInfo.firstName = this.personalInfo.lastName = this.personalInfo.phoneNumber = this.personalInfo.gender = this.personalInfo.smokingHabits = this.personalInfo.dateOfBirth = this.personalInfo.maritalStatus = '';
+         this.personalInfo.firstName = this.personalInfo.lastName = this.personalInfo.phoneNumber = this.personalInfo.gender = this.personalInfo.smokingHabits = this.personalInfo.dateOfBirth = this.personalInfo.bio = this.personalInfo.maritalStatus = '';
 
          this.dismiss();
        })
