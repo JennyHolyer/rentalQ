@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="pink">
+    <ion-title>
+      Edit Retired
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button type="submit" (click)="saveForm(retired.id)">
+        <span ion-text color="white" showWhen="ios">Save</span>
+        <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- Edit retired -->
+<ion-content>
+    <form (ngSubmit)="saveForm(retired.id)">
+        <ion-list>
+            <ion-item>
+              <ion-label floating>pensionName</ion-label>
+              <ion-input type="text" name="pensionName" [value]="retired.pensionName" [(ngModel)]="retiredInfo.pensionName"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>pensionNumber</ion-label>
+                <ion-input type="text" name="pensionNumber" [value]="retired.pensionNumber" [(ngModel)]="retiredInfo.pensionNumber"></ion-input>
+            </ion-item>
+
+
+        </ion-list>
+    </form>
+</ion-content>
