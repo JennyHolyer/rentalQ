@@ -63,6 +63,7 @@ export class EmploymentsEditPage {
               this.employmentInfo.phoneNumber = res.data.phoneNumber
               this.employmentInfo.startDate = res.data.startDate
               this.employmentInfo.endDate = res.data.endDate
+             
           })
           .catch(err => {
             console.log(err);

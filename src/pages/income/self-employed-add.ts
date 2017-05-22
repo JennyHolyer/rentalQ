@@ -7,6 +7,8 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 /*
   Generated class for the Emergency page.
@@ -29,9 +31,22 @@ export class SelfEmployedAddPage {
   acnNumber:string = '01235984';
   salary:number = 500000;
   startDate:string = '04/29/2007';
+  public selfEmployedForm:any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.selfEmployedForm = this.formBuilder.group({
+            "businessName": ['', Validators.required],
+            "position": ['', Validators.required],
+            "abnNumber": ['', Validators.required],
+            "acnNumber": ['', Validators.required],
+            "salary": [ , Validators.required],
+            "startDate": ['', Validators.required]
+      });
+
+
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -71,8 +86,8 @@ export class SelfEmployedAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Employment")
     this.backand.object.create('incomeSelfEmployed', {
-     'businessName': this.businessName, 'position':this.position,
-     'abnNumber': this.abnNumber, 'salary': this.salary,'acnNumber': this.acnNumber, 'startDate': this.startDate, 'user': this.loggedUser
+     'businessName': this.selfEmployedForm.value.businessName, 'position':this.selfEmployedForm.value.position,
+     'abnNumber': this.selfEmployedForm.value.abnNumber, 'salary': this.selfEmployedForm.value.salary,'acnNumber': this.selfEmployedForm.value.acnNumber, 'startDate': this.selfEmployedForm.value.startDate, 'user': this.loggedUser
     })
     .then(data => {
      alert('Self-Employed Successfully Added');

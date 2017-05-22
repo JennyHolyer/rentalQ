@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -31,11 +32,24 @@ export class EmploymentsAddPage {
   phoneNumber:string = '555-777-3333';
   startDate:string = '04/29/2007';
   endDate:string = 'N/A';
+  public employmentsForm:any;
 
 
 
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+      this.employmentsForm = this.formBuilder.group({
+          "companyName": ['', Validators.required],
+          "position": ['', Validators.required],
+          "employmentType": ['', Validators.required],
+          "salary": [ , Validators.required],
+          "managerFullName": ['', Validators.required],
+          "phoneNumber": ['', Validators.required],
+          "startDate": ['', Validators.required]
+        //   "endDate": ['', Validators.required]
+
+      });
+
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -74,8 +88,8 @@ export class EmploymentsAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Employment")
     this.backand.object.create('incomeEmployment', {
-     'companyName': this.companyName, 'position':this.position,
-     'employmentType': this.employmentType, 'salary': this.salary,'managerFullName': this.managerFullName, 'phoneNumber': this.phoneNumber, 'startDate': this.startDate, 'user': this.loggedUser
+     'companyName': this.employmentsForm.value.companyName, 'position':this.employmentsForm.value.position,
+     'employmentType': this.employmentsForm.value.employmentType, 'salary': this.employmentsForm.value.salary,'managerFullName': this.employmentsForm.value.managerFullName, 'phoneNumber': this.employmentsForm.value.phoneNumber, 'startDate': this.employmentsForm.value.startDate, 'user': this.loggedUser
     })
     .then(data => {
      alert('Employment Successfully Added');

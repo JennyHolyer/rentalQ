@@ -1,10 +1,12 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+import { CloudModule } from '@ionic/cloud-angular';
+import { CloudSettings } from '@ionic/cloud-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -67,11 +69,11 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
 import { Camera } from '@ionic-native/camera';
 
 
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': 'dfc2d4b3'
-  }
-};
+// const cloudSettings: CloudSettings = {
+//   'core': {
+//     'app_id': 'dfc2d4b3'
+//   }
+// };
 
 
 @NgModule({
@@ -115,7 +117,7 @@ const cloudSettings: CloudSettings = {
     LandingPage
   ],
   imports: [
-    CloudModule.forRoot(cloudSettings),
+    // CloudModule.forRoot(cloudSettings),
     BrowserModule, HttpModule, IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() // Storage also imported here
   ],
@@ -166,7 +168,7 @@ const cloudSettings: CloudSettings = {
     File,
     FilePath,
     Transfer,
-    // TransferObject,
+    TransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BackandService // Again add BackandService
   ]

@@ -7,6 +7,7 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage'; // Storage imported here after declaration in app.module.ts
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 /*
@@ -21,8 +22,8 @@ import { Storage } from '@ionic/storage'; // Storage imported here after declara
 })
 export class LoginPage {
 
-  username:string = '';
-  password:string = '';
+  username:string = 'jack@test.com';
+  password:string = 'password';
   auth_type:string = "N/A";
   is_auth_error:boolean = false;
   auth_status:string = null;
@@ -30,9 +31,10 @@ export class LoginPage {
   oldPassword: string = '';
   newPassword: string = '';
   confirmNewPassword: string = '';
+  errorMessage: string = '';
+  public loginForm:any;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public http: Http, storage: Storage) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, public http: Http, storage: Storage) {
     // this.auth_type = backand.getAuthType();
     // this.auth_status = backand.getAuthStatus();
     // this.loggedInUser = backand.getUsername();
@@ -46,12 +48,19 @@ export class LoginPage {
        })
      }); // End of storage
 
+     this.loginForm = this.formBuilder.group({
+         "username": ['', Validators.required],
+         "password": ['', Validators.required]
+
+     });
   } // End of constructor
+
+
 
   public getAuthTokenSimple() {
 
     this.auth_type = 'Token';
-    this.backand.signin(this.username, this.password)
+    this.backand.signin(this.loginForm.value.username, this.loginForm.value.password)
     .then(res => {
       console.log('signin succeeded with user:' + res.data.firstName);
       this.auth_status = 'OK';
@@ -65,6 +74,7 @@ export class LoginPage {
       this.password = '';
     })
     .catch(err => {
+        this.errorMessage = "Your email & password don't match!"
         console.log("Error Message!")
       console.log(err);
 

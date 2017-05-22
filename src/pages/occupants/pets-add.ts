@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -26,9 +27,19 @@ export class PetsAddPage {
   registrationNumber:string = '0894515544';
   name:string = ' G Unicorn';
 
+  public petForm:any;
+
+  constructor(public navCtrl: NavController , public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.petForm = this.formBuilder.group({
+          "name": ['', Validators.required],
+          "registrationNumber": ['', Validators.required]
+
+      });
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -58,6 +69,11 @@ export class PetsAddPage {
 
   } // END OF CONSTRUCTOR
 
+
+  logForm(){
+      console.log(this.petForm.value, "Pet form stuff")
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad CoApplicants Add Page');
   }
@@ -67,7 +83,7 @@ export class PetsAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Pets")
     this.backand.object.create('pets', {
-     'name': this.name, 'registrationNumber':this.registrationNumber, 'user': this.loggedUser
+     'name': this.petForm.value.name, 'registrationNumber':this.petForm.value.registrationNumber, 'user': this.loggedUser
     })
     .then(data => {
      alert('CoApplicant Successfully Added');

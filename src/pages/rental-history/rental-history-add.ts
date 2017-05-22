@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -42,7 +43,29 @@ export class RentalHistoryAddPage {
   faxNumber:string = '2547898789';
   loggedUser:string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+  public rentalHistoryForm:any;
+
+
+  constructor(public navCtrl: NavController,  public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.rentalHistoryForm = this.formBuilder.group({
+            "streetAddress": ['', Validators.required],
+            "unitNumber": ['', Validators.required],
+            "city": ['', Validators.required],
+            "state": ['', Validators.required],
+            "postCode": ['', Validators.required],
+            "rentAmount": ['', Validators.required],
+            "moveInDate": ['', Validators.required],
+            "moveOutDate": ['', Validators.required],
+            "pmFirstName": ['', Validators.required],
+            "pmLastName": ['', Validators.required],
+            "email": ['', Validators.required],
+            "phoneNumber": ['', Validators.required],
+            "faxNumber": ['', Validators.required],
+            "isCurrent": ['', Validators.required]
+
+
+      });
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -83,7 +106,7 @@ export class RentalHistoryAddPage {
     console.log("Save Method Entered in Rental History")
     console.log(this.date.moveInDate, "MOVE IN", this.date.moveOutDate, "<== MOVE OUT")
     this.backand.object.create('rentalHistory', {
-     'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'moveInDate': this.date.moveInDate, 'moveOutDate': this.date.moveOutDate, 'rentAmount': this.rentAmount, 'isCurrent': this.isCurrent, 'pmFirstName': this.pmFirstName, 'pmLastName': this.pmLastName, 'email': this.email, 'phoneNumber': this.phoneNumber, 'faxNumber': this.faxNumber, 'user': this.loggedUser
+     'streetAddress': this.rentalHistoryForm.value.streetAddress, 'unitNumber': this.rentalHistoryForm.value.unitNumber, 'city': this.rentalHistoryForm.value.city, 'state': this.rentalHistoryForm.value.state, 'postCode': this.rentalHistoryForm.value.postCode, 'moveInDate': this.rentalHistoryForm.value.moveInDate, 'moveOutDate': this.rentalHistoryForm.value.moveOutDate, 'rentAmount': this.rentalHistoryForm.value.rentAmount, 'isCurrent': this.rentalHistoryForm.value.isCurrent, 'pmFirstName': this.rentalHistoryForm.value.pmFirstName, 'pmLastName': this.rentalHistoryForm.value.pmLastName, 'email': this.rentalHistoryForm.value.email, 'phoneNumber': this.rentalHistoryForm.value.phoneNumber, 'faxNumber': this.rentalHistoryForm.value.faxNumber, 'user': this.loggedUser
     })
     .then(data => {
      alert('Rental History Successfully Added');

@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -32,8 +33,21 @@ export class EmergencyAddPage {
   postCode:string = '';
   phoneNumber:string = '';
   loggedUser:string = '';
+  public emergencyForm:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.emergencyForm = this.formBuilder.group({
+            "fullName": ['', Validators.required],
+            "relationship": ['', Validators.required],
+            "streetAddress": ['', Validators.required],
+            "unitNumber": ['', Validators.required],
+            "city": ['', Validators.required],
+            "state": ['', Validators.required],
+            "postCode": ['', Validators.required],
+            "phoneNumber": ['', Validators.required]
+      });
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -74,7 +88,7 @@ export class EmergencyAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered")
     this.backand.object.create('emergency', {
-     'fullName': this.fullName, 'relationship': this.relationship, 'streetAddress': this.streetAddress, 'unitNumber': this.unitNumber, 'city': this.city, 'state': this.state, 'postCode': this.postCode, 'phoneNumber': this.phoneNumber, 'user': this.loggedUser
+     'fullName': this.emergencyForm.value.fullName, 'relationship': this.emergencyForm.value.relationship, 'streetAddress': this.emergencyForm.value.streetAddress, 'unitNumber': this.emergencyForm.value.unitNumber, 'city': this.emergencyForm.value.city, 'state': this.emergencyForm.value.state, 'postCode': this.emergencyForm.value.postCode, 'phoneNumber': this.phoneNumber, 'user': this.loggedUser
     })
     .then(data => {
      alert('Emergency Successfully Added');

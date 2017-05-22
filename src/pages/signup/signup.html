@@ -16,41 +16,43 @@
 
   <!-- <ion-card>
   <ion-card-content> -->
-    <form (ngSubmit)="signUp()">
+   <p>{{this.errorMessage}}</p>
+    <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+
     <ion-list>
       <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="email" name="email" [value]="email" (input)="email = $event.target.value" [(ngModel)]="signup.email"></ion-input>
+        <ion-input type="email" formControlName="email" [value]="email" (input)="email = $event.target.value"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>First Name</ion-label>
-        <ion-input type="text" name="firstName" [value]="firstName" (input)="firstName = $event.target.value" [(ngModel)]="signup.firstName"></ion-input>
+        <ion-input type="text" formControlName="firstName" [value]="firstName" (input)="firstName = $event.target.value"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Last Name</ion-label>
-        <ion-input type="text" name="lastName" [value]="lastName" (input)="lastName = $event.target.value" [(ngModel)]="signup.lastName"></ion-input>
+        <ion-input type="text" formControlName="lastName" [value]="lastName" (input)="lastName = $event.target.value"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" name="password" [value]="password" (input)="password = $event.target.value" [(ngModel)]="signup.password"></ion-input>
+        <ion-input type="password" formControlName="password" [value]="password" (input)="password = $event.target.value"></ion-input>
       </ion-item>
         <ion-item>
         <ion-label floating>Confirm Password</ion-label>
-      <ion-input type="password" name="confirmPassword" [value]="confirmPassword" (input)="confirmPassword = $event.target.value" [(ngModel)]="signup.confirmPassword"></ion-input>
+      <ion-input type="password" formControlName="confirmPassword" [value]="confirmPassword" (input)="confirmPassword = $event.target.value"></ion-input>
       </ion-item>
       <!-- <h4 style="color:red;" ng-bind="vm.errorMessage"></h4> -->
       <div class="bottom-margin"></div>
 
       <div class="center-stuff">
-        <button ion-button color="primary" block icon-left round (click)="signUp()">
+        <button ion-button color="primary" block icon-left round type="submit" [disabled]="!signupForm.valid">
           <ion-icon name="md-checkmark-circle-outline"></ion-icon>
           Sign Up
         </button>
       </div>
-
       <div class="bottom-margin"></div>
+
 
       <!-- <div class="button-bar">
       <button ion-button class="icon-left ion-social-facebook" color="facebook" (click)="socialSignin('facebook')" type="button" block icon-left round><ion-icon name="logo-facebook"></ion-icon></button>
@@ -62,7 +64,7 @@
         <button ion-button (click)="login()" color="light" clear small>Existing Member? Log In</button>
       </div>
     </ion-list>
-  </form>
+    </form>
   <!-- </ion-card-content>
 </ion-card> -->
 

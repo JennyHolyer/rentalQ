@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button type="submit" (click)="save()">
+      <button ion-button type="submit" (click)="save()" [disabled]="!selfEmployedForm.valid">
         <span ion-text color="white" showWhen="ios">Save</span>
         <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
       </button>
@@ -19,34 +19,35 @@
 </ion-header>
 
 <ion-content>
+<form [formGroup]="selfEmployedForm" (ngSubmit)="save()">
 
     <!-- Add self-employed -->
   <ion-list>
     <ion-item>
       <ion-label floating>Employer</ion-label>
-      <ion-input type="text" name="businessName" [value]="businessName" (input)="businessName = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="businessName"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>Position</ion-label>
-        <ion-input type="text" name="position" [value]="position" (input)="position = $event.target.value"></ion-input>
+        <ion-input type="text" formControlName="position"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>ABN Number</ion-label>
-      <ion-input type="text" name="abnNumber" [value]="abnNumber" (input)="abnNumber = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="abnNumber"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>ACN Number</ion-label>
-      <ion-input type="text" name="acnNumber" [value]="acnNumber" (input)="acnNumber = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="acnNumber"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>Salary</ion-label>
-        <ion-input type="text" name="salary" [value]="salary" (input)="salary = $event.target.value"></ion-input>
+        <ion-input type="text" formControlName="salary"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Start Date</ion-label>
-      <ion-input type="text" name="startDate" [value]="startDate" (input)="startDate = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="startDate"></ion-input>
     </ion-item>
 
     </ion-list>
-
+</form>
 </ion-content>

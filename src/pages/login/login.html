@@ -14,14 +14,18 @@
   <div class="login-logo">
     <h1>Rental Q</h1>
   </div>
+  <p>{{this.errorMessage}}</p>
+  <form [formGroup]="loginForm" (ngSubmit)="getAuthTokenSimple()">
+
+
   <ion-list>
       <ion-item>
           <ion-label floating>Email</ion-label>
-          <ion-input type="text" [value]="username" (input)="username = $event.target.value"></ion-input>
+          <ion-input type="text" [value]="username" formControlName="username" (input)="username = $event.target.value"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label floating>Password</ion-label>
-          <ion-input  [value]="password" (input)="password = $event.target.value" type="password"></ion-input>
+          <ion-input  [value]="password" formControlName="password" (input)="password = $event.target.value" type="password"></ion-input>
       </ion-item>
       <ion-item floating>
           <!-- <ion-label floating>Password</ion-label> -->
@@ -30,11 +34,13 @@
 <!-- <button ion-button (click)="getAuthTokenSimple()" color="secondary" full>Log In</button> -->
 
 <div class="center-stuff">
-  <button ion-button color="primary" block icon-left round (click)="getAuthTokenSimple()">
+  <button ion-button color="primary" block icon-left round type="submit" [disabled]="!loginForm.valid">
     <ion-icon name="md-checkmark-circle-outline"></ion-icon>
     Log In
   </button>
 </div>
+
+</form>
 
   <div class="center-stuff">
     <button ion-button (click)="signUp()" color="white" clear small>New? Sign Up</button>

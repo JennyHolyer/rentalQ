@@ -13,7 +13,7 @@ import { PetsAddPage } from './pets-add';
 import { CoApplicantsEditPage } from './coapplicants-edit';
 import { DependentsEditPage } from './dependents-edit';
 import { PetsEditPage } from './pets-edit';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 /*
@@ -41,7 +41,7 @@ export class OccupantsPage {
   petObject = {};
 
 
-  constructor(public modalCtrl: ModalController, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController,  public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
+  constructor(public modalCtrl: ModalController, public formBuilder: FormBuilder, navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController,  public actionSheetCtrl: ActionSheetController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController) {
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",

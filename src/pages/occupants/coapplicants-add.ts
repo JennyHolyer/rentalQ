@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -28,9 +29,20 @@ export class CoApplicantsAddPage {
   lastName:string = '848';
   phoneNumber:string = 'Rancho';
   relationship:string = 'CA';
+  public coapplicantsForm:any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.coapplicantsForm = this.formBuilder.group({
+            "age": ['', Validators.required],
+            "firstName": ['', Validators.required],
+            "lastName": ['', Validators.required],
+            "phoneNumber": ['', Validators.required],
+            "relationship": ['', Validators.required]
+
+      });
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -69,7 +81,7 @@ export class CoApplicantsAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in CoApplicants")
     this.backand.object.create('coApplicants', {
-     'age': this.age, 'firstName':this.firstName, 'lastName': this.lastName, 'phoneNumber':this.phoneNumber, 'relationship':this.relationship, 'user': this.loggedUser
+     'age': this.coapplicantsForm.value.age, 'firstName':this.coapplicantsForm.value.firstName, 'lastName': this.coapplicantsForm.value.lastName, 'phoneNumber':this.coapplicantsForm.value.phoneNumber, 'relationship':this.coapplicantsForm.value.relationship, 'user': this.loggedUser
     })
     .then(data => {
      alert('CoApplicant Successfully Added');

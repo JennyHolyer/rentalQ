@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button type="submit" (click)="save()">
+      <button ion-button type="submit" (click)="save()" [disabled]="!rentalHistoryForm.valid">
         <span ion-text color="white" showWhen="ios">Save</span>
         <ion-icon name="ios-checkmark-circle" showWhen="android,windows"></ion-icon>
       </button>
@@ -19,83 +19,72 @@
 </ion-header>
 
 <ion-content>
-
+<form [formGroup]="rentalHistoryForm" (ngSubmit)="save()">
   <!-- Add Rental History Contact -->
   <ion-list>
     <ion-item>
       <ion-label floating>Street Address</ion-label>
-      <ion-input type="text" name="streetAddress" [value]="streetAddress" (input)="streetAddress = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="streetAddress"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Unit Number</ion-label>
-      <ion-input type="text" name="unitNumber" [value]="unitNumber" (input)="unitNumber = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="unitNumber"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>City</ion-label>
-      <ion-input type="text" name="city" [value]="city" (input)="city = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="city"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>State</ion-label>
-      <ion-input type="text" name="state" [value]="state" (input)="state = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="state"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Post Code</ion-label>
-      <ion-input type="text" name="postCode" [value]="postCode" (input)="postCode = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="postCode"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Monthly Rent Amount</ion-label>
-      <ion-input type="number" name="rentAmount" [value]="rentAmount" (input)="rentAmount = $event.target.value"></ion-input>
+      <ion-input type="number" formControlName="rentAmount"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Move-in Date</ion-label>
-      <ion-datetime name="moveInDate" displayFormat="DD MMM YYYY" [(ngModel)]="date.moveInDate" (input)="moveInDate = $event.target.value"></ion-datetime>
+      <ion-datetime formControlName="moveInDate" displayFormat="DD MMM YYYY" [(ngModel)]="date.moveInDate"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label floating>Move-out Date</ion-label>
-      <ion-datetime name="moveOutDate" displayFormat="DD MMM YYYY" [(ngModel)]="date.moveOutDate" (input)="moveOutDate = $event.target.value"></ion-datetime>
+      <ion-datetime formControlName="moveOutDate" displayFormat="DD MMM YYYY" [(ngModel)]="date.moveOutDate"></ion-datetime>
     </ion-item>
 
     <ion-item>
       <ion-label>Tick if this still your current address</ion-label>
-      <ion-checkbox color="pink" checked="false" [(ngModel)]="isCurrent"></ion-checkbox>
+      <ion-checkbox color="pink" checked="false" formControlName="isCurrent"></ion-checkbox>
     </ion-item>
 
-    <!-- <ion-item>
-      <ion-label floating>Move-out Date</ion-label>
-      <ion-input type="string" name="moveOutDate" [value]="moveOutDate" (input)="moveOutDate = $event.target.value"></ion-input>
-    </ion-item> -->
     <div class="form-subtitle">
       <p>Who was Your Property Manager?</p>
     </div>
     <ion-item>
       <ion-label floating>First Name</ion-label>
-      <ion-input type="text" name="pmFirstName" [value]="pmFirstName" (input)="pmFirstName = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="pmFirstName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Last Name</ion-label>
-      <ion-input type="text" name="pmLastName" [value]="pmLastName" (input)="pmLastName = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="pmLastName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Email</ion-label>
-      <ion-input type="text" name="email" [value]="email" (input)="email = $event.target.value"></ion-input>
+      <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Phone Number</ion-label>
-      <ion-input type="phone" name="phoneNumber" [value]="phoneNumber" (input)="phoneNumber = $event.target.value"></ion-input>
+      <ion-input type="phone" formControlName="phoneNumber"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Fax Number</ion-label>
-      <ion-input type="phone" name="faxNumber" [value]="faxNumber" (input)="faxNumber = $event.target.value"></ion-input>
+      <ion-input type="phone" formControlName="faxNumber"></ion-input>
     </ion-item>
     <div class="bottom-margin"></div>
   </ion-list>
 
-  <!-- <ion-fab right bottom>
-  <button ion-fab color="pink"><ion-icon name="md-add"></ion-icon></button>
-    <ion-fab-list side="top">
-      <button ion-fab><ion-icon name="md-medkit"></ion-icon></button>
-      <button ion-fab><ion-icon name="ios-person"></ion-icon></button>
-    </ion-fab-list>
-  </ion-fab> -->
-
+</form>
 </ion-content>

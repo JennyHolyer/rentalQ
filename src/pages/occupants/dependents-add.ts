@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -25,10 +26,16 @@ export class DependentsAddPage {
   loggedUser:string = '';
   age:string = '23';
   fullName:string = 'Jenny Vee';
+  public dependentsForm:any;
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+      this.dependentsForm = this.formBuilder.group({
+            "age": ['', Validators.required],
+            "fullName": ['', Validators.required]
+      });
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -67,7 +74,7 @@ export class DependentsAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Dependents")
     this.backand.object.create('dependents', {
-     'age': this.age, 'fullName':this.fullName, 'user': this.loggedUser
+     'age': this.dependentsForm.value.age, 'fullName':this.dependentsForm.value.fullName, 'user': this.loggedUser
     })
     .then(data => {
      alert('CoApplicant Successfully Added');

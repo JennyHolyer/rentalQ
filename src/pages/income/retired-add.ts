@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { LoadingController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { ViewController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
   Generated class for the Emergency page.
@@ -25,10 +26,17 @@ export class RetiredAddPage {
   loggedUser:string = '';
   pensionName:string = 'SURS—State Universities Retirement System';
   pensionNumber:string = '0894515544';
+  public retiredForm:any;
 
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
+
+    this.retiredForm = this.formBuilder.group({
+          "pensionName": ['', Validators.required],
+          "pensionNumber": ['', Validators.required]
+    });
+
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -67,7 +75,7 @@ export class RetiredAddPage {
     console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Retired")
     this.backand.object.create('incomeRetired', {
-     'pensionName': this.pensionName, 'pensionNumber':this.pensionNumber, 'user': this.loggedUser
+     'pensionName': this.retiredForm.value.pensionName, 'pensionNumber':this.retiredForm.value.pensionNumber, 'user': this.loggedUser
     })
     .then(data => {
      alert('Retired Successfully Added');

@@ -8,6 +8,8 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 /*
@@ -36,43 +38,33 @@ export class SignupPage {
     password: '',
     confirmPassword: ''
   }
+  public signupForm:any;
+  errorMessage: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, public http: Http, private statusBar: StatusBar) {
+
+
+  constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, public http: Http, private statusBar: StatusBar) {
 
     this.statusBar.overlaysWebView(true);
     this.statusBar.backgroundColorByHexString('#ffffff');
 
-  }
+    this.signupForm = this.formBuilder.group({
+        "email": ['', Validators.required],
+        "firstName": ['', Validators.required],
+        "lastName": ['', Validators.required],
+        "password": ['', Validators.required],
+        "confirmPassword": ['', Validators.required]
+    });
 
-
-
-  // public signUp() {
-  //   console.log("Entered Sign Up Method")
-  //   if (this.password != this.confirmPassword){
-  //     alert('Passwords should match');
-  //     return;
-  //   }
-  //   let $obs = this.backand.signup(this.email, this.password, this.confirmPassword, this.firstName, this.lastName);
-  //   $obs.subscribe(
-  //     data => {
-  //         alert('Sign up succeeded');
-  //         console.log(data);
-  //         this.email = this.password = this.confirmPassword = this.firstName = this.lastName = '';
-  //     },
-  //     err => {
-  //         // this.backand.logError(err)
-  //         console.log("Error Signing Up!")
-  //     },
-  // }
-
+  } // End of constructor
 
   public signUp() {
-  console.log("Entered Sign Up Method")
-  if (this.password != this.confirmPassword){
-    alert('Passwords should match');
-    return;
-  }
-  this.backand.signup(this.signup.firstName, this.signup.lastName, this.signup.email, this.signup.password, this.signup.confirmPassword)
+  // console.log("Entered Sign Up Method")
+  // if (this.signupForm.value.password != this.signupForm.value.confirmPassword){
+  //   alert('Passwords should match');
+  //   return;
+  // }
+  this.backand.signup(this.signupForm.value.firstName, this.signupForm.value.lastName, this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.confirmPassword)
   .then(res => {
     console.log(res, "RES");
     console.log(res.data, "RES.DATA");
@@ -84,6 +76,7 @@ export class SignupPage {
     this.email = this.password = this.confirmPassword = this.firstName = this.lastName = '';
   })
   .catch(err => {
+    this.errorMessage = err.data;
     console.log("Error Signing Up!")
     console.log(err);
   });

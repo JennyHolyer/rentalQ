@@ -56,8 +56,10 @@ export class DashboardPage {
   //   offers: ''
   // }
 
-constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private backand: BackandService, public deploy: Deploy) {
 
+
+constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private backand: BackandService) {
+// , public deploy: Deploy
   this.dashboard = "applications";
 
   let loader = this.loadingCtrl.create({
