@@ -1,7 +1,6 @@
 <ion-tabs>
   <ion-tab [root]="tab1Root" tabTitle="Dashboard" tabIcon="ios-speedometer"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Alerts" tabIcon="ios-notifications"
-  tabBadge="{{alertBadgeCount > 0 ? alertBadgeCount : null}}" tabBadgeStyle="pink"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="Alerts" tabIcon="ios-notifications" tabBadge="{{alertBadgeCount}}" tabBadgeStyle="pink"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="Profile" tabIcon="ios-contact"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="Menu" tabIcon="ios-menu"></ion-tab>
 </ion-tabs>

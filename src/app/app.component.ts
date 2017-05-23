@@ -6,7 +6,7 @@ import { BackandService } from '@backand/angular2-sdk'
 import { TabsPage } from '../pages/tabs/tabs';
 import { LandingPage } from '../pages/landing/landing';
 import { LoginPage } from '../pages/login/login';
-import {Deploy} from '@ionic/cloud-angular';
+import { Deploy } from '@ionic/cloud-angular';
 
 // import * as io from "socket.io-client";
 

@@ -81,7 +81,7 @@ let actionSheet = this.actionSheetCtrl.create({
       role: 'destructive',
       handler: () => {
         console.log('Delete');
-        this.backand.object.remove("rentalHistory", id, {
+        this.backand.object.remove("Address", id, {
           "deep" : false })
           .then(res => {
             alert('Successfully Deleted!');

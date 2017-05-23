@@ -24,8 +24,8 @@ export class PetsAddPage {
 
   user = {};
   loggedUser:string = '';
-  registrationNumber:string = '';
-  name:string = '';
+  registrationNumber:string = '0894515544';
+  name:string = ' G Unicorn';
 
   public petForm:any;
 
