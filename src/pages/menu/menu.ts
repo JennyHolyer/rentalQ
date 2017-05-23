@@ -51,10 +51,15 @@ export class MenuPage {
 
 
     this.items = [
+      // {
+      //   'title': 'Rental Check',
+      //   'icon': 'ios-checkmark-circle',
+      //   'link': this.rentalCheckPage,
+      // },
       {
-        'title': 'Rental Check',
-        'icon': 'ios-checkmark-circle',
-        'link': this.rentalCheckPage,
+        'title': 'About Me',
+        'icon': 'ios-person',
+        'link': this.myAccountPage,
       },
       {
         'title': 'Rental History',
@@ -80,11 +85,6 @@ export class MenuPage {
         'title': 'Utilities Connection',
         'icon': 'ios-bulb',
         'link': this.utilitiesPage,
-      },
-      {
-        'title': 'My Account',
-        'icon': 'ios-person',
-        'link': this.myAccountPage,
       },
       {
         'title': 'Settings',

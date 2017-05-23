@@ -24,11 +24,9 @@ export class RetiredAddPage {
 
   user = {};
   loggedUser:string = '';
-  pensionName:string = 'SURS—State Universities Retirement System';
-  pensionNumber:string = '0894515544';
+  pensionName:string = '';
+  pensionNumber:string = '';
   public retiredForm:any;
-
-
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 

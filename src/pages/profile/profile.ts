@@ -23,9 +23,9 @@ export class ProfilePage {
   dependents: any[] = [];
   documents: any[] = [];
   emergency: any[] = []; // Grab index 0
-  incomeemployment: any[] = [];
-  incomeretired: any[] = [];
-  incomeselfemployed: any[] = [];
+  incomeemployment = [];
+  incomeretired = [];
+  incomeselfemployed = [];
   pets: any[] = [];
   rentalhistory: any[] = [];
   utilities: any[] = [];
@@ -35,7 +35,8 @@ export class ProfilePage {
   water: boolean = null;
   terms: boolean = null;
   age:number = null;
-  // dateOfBirth = '';
+  shouldHide = true;
+  dateOfBirth = '';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public modalCtrl: ModalController) {
 
@@ -55,8 +56,6 @@ export class ProfilePage {
         "deep" : true })
         .then(res => {
           this.user = res.data
-          console.log(this.user, "<== USER OBJECT")
-          console.log(res.data.dateOfBirth, "<===== THIS.DATEOFBIRTH")
           this.coapplicants = res.data.coapplicants
           this.dependents = res.data.dependents
           this.documents = res.data.documents
@@ -73,6 +72,45 @@ export class ProfilePage {
           this.water = res.data.utilities[0].water
           this.terms = res.data.utilities[0].termsAgree
 
+
+          // Control display of sections depending on whether or not data is present.
+          if (res.data.coapplicants.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.dependents.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.documents.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.emergency.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.incomeemployment.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.incomeselfemployed.length > 0) {
+            this.shouldHide = true;
+          } else {
+            this.shouldHide = true;
+          }
+
+          if(res.data.incomeretired.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.pets.length > 0) {
+            this.shouldHide = true;
+          }
+
+          if(res.data.rentalhistory.length > 0) {
+            this.shouldHide = true;
+          }
 
       // Start calculateAge Function
       function calculateAge (birthYear){

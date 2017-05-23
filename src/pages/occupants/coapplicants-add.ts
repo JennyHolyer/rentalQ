@@ -25,13 +25,11 @@ export class CoApplicantsAddPage {
   user = {};
   loggedUser:string = '';
   age:string = '';
-  firstName:string = '456 W Arlington Lane';
-  lastName:string = '848';
-  phoneNumber:string = 'Rancho';
-  relationship:string = 'CA';
+  firstName:string = '';
+  lastName:string = '';
+  phoneNumber:string = '';
+  relationship:string = '';
   public coapplicantsForm:any;
-
-
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
@@ -78,7 +76,6 @@ export class CoApplicantsAddPage {
 
 // save method
   save() {
-    console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in CoApplicants")
     this.backand.object.create('coApplicants', {
      'age': this.coapplicantsForm.value.age, 'firstName':this.coapplicantsForm.value.firstName, 'lastName': this.coapplicantsForm.value.lastName, 'phoneNumber':this.coapplicantsForm.value.phoneNumber, 'relationship':this.coapplicantsForm.value.relationship, 'user': this.loggedUser

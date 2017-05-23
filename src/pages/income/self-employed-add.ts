@@ -25,15 +25,13 @@ export class SelfEmployedAddPage {
 
   user = {};
   loggedUser:string = '';
-  businessName:string = 'Vivint';
-  position:string = 'CEO';
-  abnNumber:string = '01235984';
-  acnNumber:string = '01235984';
-  salary:number = 500000;
-  startDate:string = '04/29/2007';
+  businessName:string = '';
+  position:string = '';
+  abnNumber:string = '';
+  acnNumber:string = '';
+  salary:number = null;
+  startDate:string = '';
   public selfEmployedForm:any;
-
-
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 
@@ -45,8 +43,6 @@ export class SelfEmployedAddPage {
             "salary": [ , Validators.required],
             "startDate": ['', Validators.required]
       });
-
-
 
     let loader = this.loadingCtrl.create({
       content: "Loading...",
@@ -83,7 +79,6 @@ export class SelfEmployedAddPage {
 
 // save method
   save() {
-    console.log(this.loggedUser, "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("Save Method Entered in Employment")
     this.backand.object.create('incomeSelfEmployed', {
      'businessName': this.selfEmployedForm.value.businessName, 'position':this.selfEmployedForm.value.position,

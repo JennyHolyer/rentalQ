@@ -6,6 +6,7 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { AlertsPage } from '../alerts/alerts';
 import { ProfilePage } from '../profile/profile';
 import { MenuPage } from '../menu/menu';
+import { Badge } from '@ionic-native/badge';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -25,7 +26,7 @@ export class TabsPage {
   alertsCount = '';
   alertBadgeCount = 0;
 
-  constructor(public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService) {
+  constructor(private badge: Badge, public loadingCtrl: LoadingController, public navCtrl: NavController, public navParams: NavParams, private backand: BackandService) {
 
     backand.user.getUserDetails(false)
     .then(res => {
