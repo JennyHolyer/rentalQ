@@ -7,7 +7,7 @@ import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/trans
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Badge } from '@ionic-native/badge';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,9 +29,6 @@ import { RetiredAddPage } from '../pages/income/retired-add';
 import { EmploymentsEditPage } from '../pages/income/employments-edit';
 import { SelfEmployedEditPage } from '../pages/income/self-employed-edit';
 import { RetiredEditPage } from '../pages/income/retired-edit';
-
-
-
 
 
 import { MyAccountPage } from '../pages/my-account/my-account';
@@ -170,6 +167,7 @@ const cloudSettings: CloudSettings = {
     Transfer,
     TransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Badge,
     BackandService // Again add BackandService
   ]
 })

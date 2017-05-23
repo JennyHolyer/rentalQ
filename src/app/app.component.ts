@@ -6,6 +6,8 @@ import { BackandService } from '@backand/angular2-sdk'
 import { TabsPage } from '../pages/tabs/tabs';
 import { LandingPage } from '../pages/landing/landing';
 import { LoginPage } from '../pages/login/login';
+import {Deploy} from '@ionic/cloud-angular';
+
 // import * as io from "socket.io-client";
 
 
@@ -17,7 +19,7 @@ export class MyApp {
   rootPage = LoginPage;
   auth_status:string = null;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private backand:BackandService) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private backand:BackandService, public deploy: Deploy) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

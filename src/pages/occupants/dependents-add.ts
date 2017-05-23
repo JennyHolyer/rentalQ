@@ -24,11 +24,9 @@ export class DependentsAddPage {
 
   user = {};
   loggedUser:string = '';
-  age:string = '23';
-  fullName:string = 'Jenny Vee';
+  age:string = '';
+  fullName:string = '';
   public dependentsForm:any;
-
-
 
   constructor(public navCtrl: NavController, public formBuilder: FormBuilder, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 

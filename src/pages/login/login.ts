@@ -8,7 +8,7 @@ import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage'; // Storage imported here after declaration in app.module.ts
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { MenuPage } from '../menu/menu';
 
 /*
   Generated class for the Login page.
@@ -66,10 +66,9 @@ export class LoginPage {
       this.auth_status = 'OK';
       this.is_auth_error = false;
       this.loggedInUser = res.data.userId;
-      this.navCtrl.setRoot(DashboardPage, {loggedInUser: res.data.userId});
+      // this.navCtrl.setRoot(DashboardPage, {loggedInUser: res.data.userId});
+      this.navCtrl.setRoot(MenuPage, {loggedInUser: res.data.userId});
       this.navCtrl.setRoot(TabsPage, {loggedInUser: res.data.userId});
-      console.log(res.data.userId, "<==== 1. LOGIN USER ID FOR LOGGED IN USER")
-      console.log(res.data, "<*********** 2. LOGIN USER DATA")
       this.username = '';
       this.password = '';
     })
