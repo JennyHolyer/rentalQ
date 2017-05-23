@@ -23,14 +23,14 @@ export class EmploymentsAddPage {
 
   user = {};
   loggedUser:string = '';
-  companyName:string = 'Google';
-  position:string = 'CEO';
-  employmentType:string = 'Full-Time';
-  salary:number = 500000;
-  managerFullName:string = 'Jimmy Kimmel';
-  phoneNumber:string = '555-777-3333';
-  startDate:string = '04/29/2007';
-  endDate:string = 'N/A';
+  companyName:string = '';
+  position:string = '';
+  employmentType:string = '';
+  salary:number = null;
+  managerFullName:string = '';
+  phoneNumber:string = '';
+  startDate:string = '';
+  endDate:string = '';
 
 
 

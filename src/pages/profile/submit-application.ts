@@ -24,18 +24,31 @@ export class SubmitApplicationPage {
   loggedUser:string = '';
   user = {};
 
-  streetAddress:string = '456 W Arlington Lane';
-  unitNumber:string = '848';
-  city:string = 'Rancho';
-  state:string = 'CA';
-  postCode:string = '85548';
+  streetAddress:string = '';
+  unitNumber:string = '';
+  city:string = '';
+  state:string = '';
+  postCode:string = '';
 
-  fullName:string = 'Linda Johnson';
-  email:string = 'tim@stancebranding.com';
-  phoneNumber:string = '8789874878';
-  faxNumber:string = '2547898789';
-  status:string = 'Approved';
-  rentalCheckComplete:boolean = true;
+  fullName:string = '';
+  email:string = '';
+  phoneNumber:string = '';
+  faxNumber:string = '';
+  status:string = '';
+  rentalCheckComplete:boolean = false;
+
+  // streetAddress:string = '456 W Arlington Lane';
+  // unitNumber:string = '848';
+  // city:string = 'Rancho';
+  // state:string = 'CA';
+  // postCode:string = '85548';
+  //
+  // fullName:string = 'Linda Johnson';
+  // email:string = 'tim@stancebranding.com';
+  // phoneNumber:string = '8789874878';
+  // faxNumber:string = '2547898789';
+  // status:string = 'Approved';
+  // rentalCheckComplete:boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 

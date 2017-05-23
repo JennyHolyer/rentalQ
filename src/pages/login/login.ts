@@ -7,7 +7,7 @@ import { DashboardPage } from '../dashboard/dashboard';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { Storage } from '@ionic/storage'; // Storage imported here after declaration in app.module.ts
-
+import { MenuPage } from '../menu/menu';
 
 /*
   Generated class for the Login page.
@@ -21,8 +21,8 @@ import { Storage } from '@ionic/storage'; // Storage imported here after declara
 })
 export class LoginPage {
 
-  username:string = '';
-  password:string = '';
+  username:string = 'jack@test.com';
+  password:string = 'password';
   auth_type:string = "N/A";
   is_auth_error:boolean = false;
   auth_status:string = null;
@@ -57,10 +57,9 @@ export class LoginPage {
       this.auth_status = 'OK';
       this.is_auth_error = false;
       this.loggedInUser = res.data.userId;
-      this.navCtrl.setRoot(DashboardPage, {loggedInUser: res.data.userId});
+      // this.navCtrl.setRoot(DashboardPage, {loggedInUser: res.data.userId});
+      this.navCtrl.setRoot(MenuPage, {loggedInUser: res.data.userId});
       this.navCtrl.setRoot(TabsPage, {loggedInUser: res.data.userId});
-      console.log(res.data.userId, "<==== 1. LOGIN USER ID FOR LOGGED IN USER")
-      console.log(res.data, "<*********** 2. LOGIN USER DATA")
       this.username = '';
       this.password = '';
     })

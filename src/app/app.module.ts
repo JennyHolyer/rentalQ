@@ -5,6 +5,7 @@ import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
+import { Badge } from '@ionic-native/badge';
 
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -165,6 +166,7 @@ const cloudSettings: CloudSettings = {
     Transfer,
     // TransferObject,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Badge,
     BackandService // Again add BackandService
   ]
 })

@@ -23,8 +23,8 @@ export class DependentsAddPage {
 
   user = {};
   loggedUser:string = '';
-  age:string = '23';
-  fullName:string = 'Jenny Vee';
+  age:string = '';
+  fullName:string = '';
 
 
 

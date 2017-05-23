@@ -23,8 +23,8 @@ export class RetiredAddPage {
 
   user = {};
   loggedUser:string = '';
-  pensionName:string = 'SURS—State Universities Retirement System';
-  pensionNumber:string = '0894515544';
+  pensionName:string = '';
+  pensionNumber:string = '';
 
 
 

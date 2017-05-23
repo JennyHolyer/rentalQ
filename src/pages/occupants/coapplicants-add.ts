@@ -24,10 +24,10 @@ export class CoApplicantsAddPage {
   user = {};
   loggedUser:string = '';
   age:string = '';
-  firstName:string = '456 W Arlington Lane';
-  lastName:string = '848';
-  phoneNumber:string = 'Rancho';
-  relationship:string = 'CA';
+  firstName:string = '';
+  lastName:string = '';
+  phoneNumber:string = '';
+  relationship:string = '';
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
