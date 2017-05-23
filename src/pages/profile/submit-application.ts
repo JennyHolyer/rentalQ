@@ -36,6 +36,10 @@ export class SubmitApplicationPage {
   faxNumber:string = '2547898789';
   status:string = 'Approved';
   rentalCheckComplete:boolean = true;
+  hasInspectedProperty = {
+      true: 'true',
+      false: 'false'
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private backand: BackandService, private alertController: AlertController, private toastCtrl: ToastController, public http: Http, public loadingCtrl: LoadingController, public actionSheetCtrl: ActionSheetController, public viewCtrl: ViewController) {
 

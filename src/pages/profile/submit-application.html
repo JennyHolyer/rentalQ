@@ -19,6 +19,35 @@
 </ion-header>
 
 <ion-content>
+    <ion-card>
+       <ion-card-header>
+         <ion-icon name="md-person"></ion-icon> Property Manager's Details
+         <ion-icon name="md-create" class="item-add"></ion-icon>
+       </ion-card-header>
+       <ion-card-content>
+         <ion-list no-lines>
+           <ion-item>
+             <ion-label floating>Willing To Pay</ion-label>
+             <ion-input type="number" name="willingToPay" [value]="willingToPay" (input)="willingToPay = $event.target.value"></ion-input>
+           </ion-item>
+           <ion-item>
+             <ion-label stacked>Lease Start Date</ion-label>
+             <ion-input type="date" name="leaseStartDate" [value]="leaseStartDate" (input)="leaseStartDate = $event.target.value"></ion-input>
+           </ion-item>
+           <ion-item>
+             <ion-label floating>Length Of Lease</ion-label>
+             <ion-input type="number" name="lengthOfLease" [value]="lengthOfLease" (input)="lengthOfLease = $event.target.value"></ion-input>
+           </ion-item>
+           <ion-item>
+             <ion-label floating>Have You Inspected the Property?</ion-label>
+             <ion-select [(ngModel)]="hasInspectedProperty">
+                <ion-option value="true">Yes</ion-option>
+                <ion-option value="false">No</ion-option>
+            </ion-select>
+           </ion-item>
+         </ion-list>
+       </ion-card-content>
+     </ion-card>
   <!-- START PROPERTY MANAGER'S DETAILS -->
   <ion-card>
      <ion-card-header>
@@ -27,8 +56,12 @@
      </ion-card-header>
      <ion-card-content>
        <ion-list no-lines>
+           <ion-item>
+               <ion-label floating>Agency Name</ion-label>
+               <ion-input type="text" name="agencyName" [value]="agencyName" (input)="agencyName = $event.target.value"></ion-input>
+           </ion-item>
          <ion-item>
-           <ion-label floating>Full Name</ion-label>
+           <ion-label floating>Agent's Full Name</ion-label>
            <ion-input type="text" name="fullName" [value]="fullName" (input)="fullName = $event.target.value"></ion-input>
          </ion-item>
          <ion-item>
@@ -38,10 +71,6 @@
          <ion-item>
            <ion-label floating>Phone Number</ion-label>
            <ion-input type="number" name="phoneNumber" [value]="phoneNumber" (input)="phoneNumber = $event.target.value"></ion-input>
-         </ion-item>
-         <ion-item>
-           <ion-label floating>Fax Number</ion-label>
-           <ion-input type="number" name="faxNumber" [value]="faxNumber" (input)="faxNumber = $event.target.value"></ion-input>
          </ion-item>
        </ion-list>
      </ion-card-content>

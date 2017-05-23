@@ -69,11 +69,11 @@ import { IonicStorageModule } from '@ionic/storage'; // Storage for storing data
 import { Camera } from '@ionic-native/camera';
 
 
-// const cloudSettings: CloudSettings = {
-//   'core': {
-//     'app_id': 'dfc2d4b3'
-//   }
-// };
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': 'dfc2d4b3'
+  }
+};
 
 
 @NgModule({
@@ -117,7 +117,7 @@ import { Camera } from '@ionic-native/camera';
     LandingPage
   ],
   imports: [
-    // CloudModule.forRoot(cloudSettings),
+    CloudModule.forRoot(cloudSettings),
     BrowserModule, HttpModule, IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot() // Storage also imported here
   ],
